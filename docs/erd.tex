@@ -5,7 +5,7 @@
   %
   % 2 of these attributes do so, the 3rd's positioning is overridden.
   \node[entity] (node1) {User}
-    [grow=left,sibling distance=1cm, level distance=2.6cm]
+    [grow=left,sibling distance=1cm, level distance=3cm]
     child {node[attribute] {\underline{User ID}}}
     child {node[attribute] {Password}}
     child {node[attribute] {Name}}
@@ -20,14 +20,14 @@
   \node[relationship] (rel3) [below right = of node1] {Post Comment};
 
   \node[entity] (node3) [right = 2.5cm of node1] {Status}
-    [grow=right, sibling distance=1cm, level distance=2cm]
-    child {node[attribute] {\underline{Status ID}}}
+    [grow=right, sibling distance=1cm, level distance=3cm]
+    child {node[attribute] {Contents}}
     child {node[attribute] {Time}}
-    child {node[attribute] {Contents}};
+    child {node[attribute] {\underline{Status ID}}};
 
 
     \node[entity] (node2) [below = of rel3] {Comment}
-      [sibling distance=2.5cm]
+      [sibling distance=3cm]
       child {node[attribute] {\underline{Comment ID}}}
       child {node[attribute] {Time}}
       child {node[attribute] {Contents}};
