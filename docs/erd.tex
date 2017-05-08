@@ -1,0 +1,42 @@
+\begin{tikzpicture}[auto,node distance=1cm]
+  % Create an entity with ID node1, label "Fancy Node 1".
+  % Default for children (ie. attributes) is to be a tree "growing up"
+  % and having a distance of 3cm.
+  %
+  % 2 of these attributes do so, the 3rd's positioning is overridden.
+  \node[entity] (node1) {User}
+    [grow=left,sibling distance=1cm, level distance=2.6cm]
+    child {node[attribute] {\underline{User ID}}}
+    child {node[attribute] {Password}}
+    child {node[attribute] {Name}}
+    child {node[attribute] {Gender}}
+    child {node[attribute] {Date of Birth}};
+    %child[grow=left,level distance=3cm] {node[attribute] {Attribute 3}};
+  % Now place a relation (ID=rel1)
+  \node[relationship] (rel1) [above = of node1] {Contacts};
+  \path (rel1) edge [double distance=1.5pt] (node1);
+
+  \node[relationship] (rel2) [above right = of node1] {Post Status};
+  \node[relationship] (rel3) [below right = of node1] {Post Comment};
+
+  \node[entity] (node3) [right = 2.5cm of node1] {Status}
+    [grow=right, sibling distance=1cm, level distance=2cm]
+    child {node[attribute] {\underline{Status ID}}}
+    child {node[attribute] {Time}}
+    child {node[attribute] {Contents}};
+
+
+    \node[entity] (node2) [below = of rel3] {Comment}
+      [sibling distance=2.5cm]
+      child {node[attribute] {\underline{Comment ID}}}
+      child {node[attribute] {Time}}
+      child {node[attribute] {Contents}};
+
+  \path (rel2) edge [->] (node1) edge (node3);
+  \path (rel3) edge (node1) edge (node3) edge(node2);
+  % Now the 2nd entity (ID=rel2)
+  %\node[entity] (node2) [above right = of rel1]	{Fancy Node 2};
+  % Draw an edge between rel1 and node1; rel1 and node2
+  %\path (rel2) edge node {1-\(m\)} (node1)
+   % edge	 node {\(n\)-\(m\)}	(node2);
+\end{tikzpicture}
