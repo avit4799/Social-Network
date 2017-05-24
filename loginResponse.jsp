@@ -11,8 +11,8 @@
 		ok=1;
 	}
 	
-	else if(request.getParameter("userID")!=null && request.getParameter("passwd")!=null){
-		String userID=request.getParameter("userID");
+	else if(request.getParameter("email")!=null && request.getParameter("passwd")!=null){
+		String email=request.getParameter("email");
 		String passwd=request.getParameter("passwd");
 
 		String path = request.getContextPath();
@@ -24,7 +24,7 @@
 		String driverName = "com.mysql.jdbc.Driver"; //驱动名称
         String DBUser = "admin"; //mysql用户名
         String DBPasswd = "1234567890"; //mysql密码
-        String DBName = "teaching"; //数据库名
+        String DBName = "working"; //数据库名
         String MySQLServer = "127.0.0.1"; //MySQL地址
         String MySQLServerPort = "3306"; //MySQL端口号（默认为3306）
 
@@ -45,7 +45,7 @@
 		stmt.executeQuery("SET NAMES UTF8");
 
 		//要执行的 sql 查询
-		String sql = "SELECT passwd FROM `teaching`.`account` where userID='"+userID+"' LIMIT 1";
+		String sql = "SELECT passwd FROM `working`.`user` where email='"+email+"' LIMIT 1";
 
 		//取得结果
 		ResultSet rs = stmt.executeQuery(sql);
@@ -53,7 +53,7 @@
 			if (rs.getString("passwd").equals(passwd)){
 				ok=1;
 				session.setAttribute("login","ok");
-				session.setAttribute("userID",userID);
+				session.setAttribute("email",email);
 				session.setMaxInactiveInterval(-1);
 			}
 		}

@@ -9,8 +9,8 @@
 
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
-	String userID=(String)session.getAttribute("userID");
-	String targetID=(String)request.getParameter("userID");
+	String email=(String)session.getAttribute("email");
+	String targetEmail=(String)request.getParameter("email");
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 		+ request.getServerName() + ":" + request.getServerPort()
@@ -20,7 +20,7 @@
 	String driverName = "com.mysql.jdbc.Driver"; //驱动名称
 	String DBUser = "admin"; //mysql用户名
 	String DBPasswd = "1234567890"; //mysql密码
-	String DBName = "teaching"; //数据库名
+	String DBName = "working"; //数据库名
 	String MySQLServer = "127.0.0.1"; //MySQL地址
 	String MySQLServerPort = "3306"; //MySQL端口号（默认为3306）
 
@@ -54,7 +54,7 @@
 %>
 <html>
 <head>
-	<title>~WELCOME TO MY HOMEPAGE~</title>
+	<title>简易社交网络</title>
 	<meta http-equiv="content-Type" content="text/html;charset=UTF-8"> 
 	<style>
 		.comment{
@@ -64,21 +64,23 @@
 		}
 	</style>
 	<SCRIPT type="text/javascript">
-	function reply(statementID){
-			var statementDoc=document.getElementById(statementID);
+	function reply(statementID, contentID){
+            var sentence = statementID+","+contentID;
+			var statementDoc=document.getElementById(sentence);
 			if(statementDoc.style.display=="none"){
 				statementDoc.style.display="";
-				statementDoc=document.getElementById(statementID+"Button");
+				statementDoc=document.getElementById(sentence+"Button");
 				statementDoc.style.display="";
 			}
 			else{
 				statementDoc.style.display="none";
-				statementDoc=document.getElementById(statementID+"Button");
+				statementDoc=document.getElementById(sentence+"Button");
 				statementDoc.style.display="none";
 			}
 		}
-		function submitReply(statementID){
-			var statementDoc=document.getElementById(statementID);
+		function submitReply(statementID, contentID){
+            var sentence = statementID+","+contentID;
+			var statementDoc=document.getElementById(sentence);
 			var strInput = statementDoc.value;
 			if (strInput!=""){
 				var xmlhttp=null;
@@ -97,7 +99,10 @@
 							window.location.reload();
 						}
 					}
-					xmlhttp.open("GET","submitReply.jsp?words="+strInput+"&statementID="+statementID,true);
+					strInput="submitReply.jsp?words="+strInput+"&statementID="+statementID+"&contentID="+contentID;
+					strInput=encodeURI(strInput);
+					strInput=encodeURI(strInput);
+					xmlhttp.open("GET",strInput,true);
 					xmlhttp.send();
 				}
 			}else{
@@ -106,18 +111,18 @@
 		}
 	</SCRIPT>
 </head>
-<body  align="center" style="width:700" bgcolor="papayawhip">
+<body  align="center" style="width:700">
 	<div align="center">
 	<table>
 	<tr>
 	<td style="width:400">Hi, <a href="main.jsp"><%
-	sql= "SELECT * FROM `teaching`.`account` where userID='"+userID+"' LIMIT 15";
+	sql= "SELECT * FROM `working`.`user` where email='"+email+"' LIMIT 15";
 	System.out.println(sql);
 
 	//取得结果
 	ResultSet rs = stmt.executeQuery(sql);
 	if (rs.next()){
-		out.println(rs.getString("UserName"));
+		out.println(rs.getString("username"));
 	}%></a>
 	</td>
 	<td style="width:300">
@@ -134,27 +139,28 @@
 	<div align="center">
 	<p width="700">
 	<%
-	sql= "SELECT * FROM `teaching`.`account` where userID='"+targetID+"' LIMIT 15";
+	sql= "SELECT * FROM `working`.`user` as a, `working`.`userdetail` as b where a.email='"+targetEmail+"' and a.email=b.email";
 	System.out.println(sql);
 
 	//取得结果
 	String targetName=null;
 	rs = stmt.executeQuery(sql);
 	if (rs.next()){
-		targetName=rs.getString("UserName");
+		targetName=rs.getString("username");
 		out.print(targetName+" ");
-		out.print(rs.getString("sex")+" ");
-		out.print(rs.getString("birthYear")+"年");
-		out.print(rs.getString("birthMonth")+"月");
+		out.print("性别："+rs.getString("sex")+" ");
+		out.print("生日："+rs.getString("year")+"年");
+		out.print(rs.getString("month")+"月");
+        out.print(rs.getString("day")+"日");
 	}%>
 	</p>
 	</div>
 	<%
-	sql= "SELECT statementID,releaseTime,content "
-		+				"FROM `teaching`.`statement` "
-		+	"where userID='"+ targetID+"' "
-	+"order by releaseTime desc "
-	+"limit 0,10;";
+	sql= "SELECT statusnum,time,content "
+		+				"FROM `working`.`status` "
+		+	"where email='"+ targetEmail+"' "
+	+"order by time desc "
+	+"limit 0,50;";
 	
 	//取得结果
 	rs = stmt.executeQuery(sql);
@@ -165,45 +171,60 @@
 	<table bgcolor="">
 		<tr height="">
 		
-	<td  width="500"><font size="4" color="black"><a href="view.jsp?userID=<%out.print(targetID);%>"><%out.print(targetName);%></a>:</font>
+	<td  width="500"><font size="4" color="black"><a href="view.jsp?email=<%out.print(targetEmail);%>"><%out.print(targetName);%></a>:</font>
 	</td>
 	</tr>
 	<tr height="100">
 	<td width="500"><font size="4" color="black"><%out.print(rs.getString("content"));%></font>
 	</td>
-	<td width="110"><font size="3" color="gray"><%out.print(rs.getString("releaseTime"));%></font>
+	<td width="110"><font size="3" color="gray"><%out.print(rs.getString("time"));%></font>
 	</td>
-	<td width="60"><a href="javascript:reply('<%out.print(rs.getString("statementID"));%>')">回复</a><td>
+	<td width="60"><a href="javascript:reply('<%out.print(rs.getString("statusnum"));%>', '0')">回复</a><td>
+	</tr>
+    <tr height="10">
+	<td  width="650">
+    <div>
+	<input style="display:none; height:25;width:500" id="<%out.print(rs.getString("statusnum"));%>,0" value=""/>
+	<input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,0Button" value="确定" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>',0)"/>
+	</div>
+    </td>
 	</tr>
 	<%
-	String sql2="SELECT a.userID as userID,userName,commentID,releaseTime,content "
-		+				"FROM `teaching`.`account` as a, `teaching`.`comment` as b "
-		+	"where a.userID=b.userID and "
-		+	"b.statementID='"+ rs.getString("statementID")+"' "
-		+"order by releaseTime "
-		+"limit 0,10;";
+	String sql2="SELECT a.email as email, a.username as username, replynum, time, reply, c.email as email2, c.username as username2 "
+		+				"FROM `working`.`user` as a, `working`.`reply` as b, `working`.`user` as c "
+		+	"where a.email=b.email and "
+		+	"b.statusnum='"+ rs.getString("statusnum")+"' "
+        +   "and c.email = b.email2 "
+		+"order by time desc "
+		+"limit 0,100;";
 	System.out.println(sql2);
 	ResultSet rs2 = stmt2.executeQuery(sql2);
 	while (rs2.next()){
 	%>
 	<tr height="">
 		
-	<td class="comment" width="500"><font size="3" color="black"><a href="view.jsp?userID=<%out.print(rs2.getString("userID"));%>"><%out.print(rs2.getString("userName"));%></a>回复:</font>
-	<font size="4" color="black"><%out.print(rs2.getString("content"));%></font>
+	<td class="comment" width="500"><font size="3" color="black">
+    <a href="view.jsp?email=<%out.print(rs2.getString("email"));%>"><%out.print(rs2.getString("username"));%></a>回复:<a href="view.jsp?email=<%out.print(rs2.getString("email2"));%>"><%out.print(rs2.getString("username2"));%></a>
+    </font><font size="4" color="black"><%out.print(rs2.getString("reply"));%></font>
 	</td>
-	<td class="comment"  width="110"><font size="3" color="gray"><%out.print(rs2.getString("releaseTime"));%></font>
+	<td  class="comment" width="110"><font size="3" color="gray"><%out.print(rs2.getString("time"));%></font>
 	</td>
-	<td  class="comment"  width="60"><td>
+	<td  class="comment" width="60"><a href="javascript:reply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')">回复</a><td>
 	</tr>
+    <tr height="10">
+	<td  width="650">
+    <div>
+	<input style="display:none; height:25;width:500" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>" value=""/>
+	<input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>Button" value="确定" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')"/>
+	</div>
+    </td>
+	</tr>
+    
 	<%
 	}
 	rs2.close();
 	%>
 	</table>
-	<div>
-	<input style="display:none; height:25;width:500" id="<%out.print(rs.getString("statementID"));%>" value=""/>
-	<input type="button" style="display:none;" id="<%out.print(rs.getString("statementID"));%>Button" value="确定" onclick="submitReply('<%out.print(rs.getString("statementID"));%>')"/>
-	</div>
 	</div>
 	<%
 	}

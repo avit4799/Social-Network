@@ -4,12 +4,12 @@
 <%@page import="java.sql.*"%>
 <%@page import="com.mysql.jdbc.ResultSetMetaData"%>
 
-<body bgcolor="papayawhip">
+<body>
 <%
 	int ok=0;
 	if(session.getAttribute("login")!=null && session.getAttribute("login").equals("ok")){
 		session.setAttribute("login",null);
-		session.setAttribute("userID",null);
+		session.setAttribute("email",null);
 		ok=1;
 	}
 	out.println("<p>退出登录！！</p>");

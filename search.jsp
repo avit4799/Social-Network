@@ -19,7 +19,7 @@
 	String driverName = "com.mysql.jdbc.Driver"; //驱动名称
     String DBUser = "admin"; //mysql用户名
     String DBPasswd = "1234567890"; //mysql密码
-    String DBName = "teaching"; //数据库名
+    String DBName = "working"; //数据库名
     String MySQLServer = "127.0.0.1"; //MySQL地址
     String MySQLServerPort = "3306"; //MySQL端口号（默认为3306）
 
@@ -41,7 +41,7 @@
 
 	//要执行的 sql 查询
 	
-	String userID=(String)session.getAttribute("userID");
+	String email=(String)session.getAttribute("email");
 	
 	String searchName=(String)request.getParameter("searchName");
 	System.out.println(searchName);
@@ -50,12 +50,12 @@
 %>
 <html>
 <head>
-	<title>Search page</title>
+	<title>查找朋友</title>
 	<meta http-equiv="content-Type" content="text/html;charset=UTF-8"> 
 	
 	<SCRIPT type="text/javascript">
-		function addFriend(userID){
-			if (userID!=""){
+		function addFriend(email){
+			if (email!=""){
 				var xmlhttp=null;
 				if (window.XMLHttpRequest){
 					// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -69,11 +69,11 @@
 					xmlhttp.onreadystatechange=function(){
 						if (xmlhttp.readyState==4 && xmlhttp.status==200){
 							window.location.href="search.jsp?searchName=<%out.print(searchName);%>";
-							var s=document.getElementById(userID);
+							var s=document.getElementById(email);
 							s.innerHTML="已添加";
 						}
 					}
-					xmlhttp.open("GET","add.jsp?friendID="+userID,true);
+					xmlhttp.open("GET","add.jsp?friendID="+email,true);
 					xmlhttp.send();
 				}
 			}else{
@@ -83,18 +83,18 @@
 	</SCRIPT>
 </head>
 
-<body  align="center" style="width:700" bgcolor="papayawhip">
+<body  align="center" style="width:700">
 	<div align="center">
 	<table>
 	<tr>
 	<td style="width:400">Hi, <a href="main.jsp"><%
-	sql= "SELECT * FROM `teaching`.`account` where userID='"+userID+"' LIMIT 15";
+	sql= "SELECT * FROM `working`.`user` where email='"+email+"' LIMIT 15";
 	System.out.println(sql);
 
 	//取得结果
 	ResultSet rs = stmt.executeQuery(sql);
 	if (rs.next()){
-		out.println(rs.getString("UserName"));
+		out.println(rs.getString("username"));
 	}%></a>
 	</td>
 	<td style="width:300">
@@ -111,14 +111,13 @@
 	<%
 	if (searchName!=null){
 		
-		sql= "SELECT * FROM `teaching`.`account` "
-			+"where userName like '%"+searchName+"%' "
-			+"and userID !='"+userID+"' "
-			+"and userID not in ( "
-			+"select userID2 from `teaching`.`friends` where userID1='"+userID+"'"
-			+") and userID not in ( "
-			+"select userID1 from `teaching`.`friends` where userID2='"+userID+"'"
-			+" );";
+		sql= "SELECT * FROM `working`.`user` as a, `working`.`userdetail` as b "
+			+"where username like '%"+searchName+"%' "
+            +"and a.email = b.email "
+			+"and a.email !='"+email+"' "
+			+"and a.email not in ( "
+			+"select email2 from `working`.`friends` where email='"+email+"'"
+			+");";
 		
 		//取得结果
 		System.out.println(sql);
@@ -127,9 +126,9 @@
 		%>
 		<div align="center" style="width:700" >
 		<li>
-		<a href="view.jsp?userID=<%out.print(rs.getString("userID"));%>"><%out.print(rs.getString("userName"));%></a> <%out.print(rs.getString("sex"));%> <%out.print(rs.getString("birthYear"));%>年<%out.print(rs.getString("birthMonth"));%>月
+		<a href="view.jsp?email=<%out.print(rs.getString("email"));%>"><%out.print(rs.getString("username"));%></a> 性别：<%out.print(rs.getString("sex"));%> 生日：<%out.print(rs.getString("year"));%>年<%out.print(rs.getString("month"));%>月<%out.print(rs.getString("day"));%>日
 		
-		<span id="<%out.print(rs.getString("userID"));%>"><input type="button" value="加为好友" onclick="addFriend('<%out.print(rs.getString("userID"));%>')" /></span>
+		<span id="<%out.print(rs.getString("email"));%>"><input type="button" value="加关注" onclick="addFriend('<%out.print(rs.getString("email"));%>')" /></span>
 		
 		</li>
 		</div>

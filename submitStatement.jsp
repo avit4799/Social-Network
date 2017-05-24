@@ -11,8 +11,8 @@
     	request.setCharacterEncoding("UTF-8");
 	if(request.getParameter("words")!=null){
 		String content= java.net.URLDecoder.decode(request.getParameter("words"),"UTF-8");//获取请求参数  
-		String userID=(String)session.getAttribute("userID");
-		String releaseTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()); 
+		String email=(String)session.getAttribute("email");
+		String time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()); 
 
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://"
@@ -23,7 +23,7 @@
         String driverName = "com.mysql.jdbc.Driver"; //驱动名称
         String DBUser = "admin"; //mysql用户名
         String DBPasswd = "1234567890"; //mysql密码
-        String DBName = "teaching"; //数据库名
+        String DBName = "working"; //数据库名
         String MySQLServer = "127.0.0.1"; //MySQL地址
         String MySQLServerPort = "3306"; //MySQL端口号（默认为3306）
 
@@ -44,7 +44,7 @@
 		stmt.executeQuery("SET NAMES UTF8");
 
 		//要执行的 sql 查询
-		String sql = "INSERT INTO  `teaching`.`statement` (userID,releaseTime,content) VALUES ('"+userID+"','"+releaseTime+"','"+content+"')";
+		String sql = "INSERT INTO  `working`.`status` (email,time,content) VALUES ('"+email+"','"+time+"','"+content+"')";
 		System.out.println("submitStatement.jsp");
 		System.out.println(sql);
 		out.println(sql);

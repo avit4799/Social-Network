@@ -22,10 +22,8 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-
 		<meta http-equiv="keywords" content="social network,login">
 		<meta http-equiv="description" content="This is the login page.">
-		<meta http-equiv="author"content="OOPRS,shenxuchuan@pku.edu.cn"> 
 		<meta http-equiv="content-Type" content="text/html;charset=UTF-8"> 
 <style type="text/CSS">...
 <!--
@@ -38,7 +36,7 @@ font-weight: bold;
 -->
 </style>
 </head>
-<body bgcolor="papayawhip" width="300" height="300">
+<body width="300" height="300">
 <center>
 
 <div align="center" class="style1 style2">系 统 登 录
@@ -47,10 +45,10 @@ font-weight: bold;
 	<table border="2" bordercolor="black" bgcolor="">
 		<tbody>
 		<tr>
-			<td height="28"><span class="style5">用户名</span> <input type="text" name="userID" maxlength="20" style="width:150"></td>
+			<td height="28"><span class="style5">邮箱：</span> <input type="text" name="email" maxlength="30" style="width:150"></td>
 		</tr>
 		<tr>
-			<td><span class="style5">密&nbsp;&nbsp;码</span> <input type="password" name="passwd" maxlength="20" style="width:150"></td>
+			<td><span class="style5">密码：</span> <input type="password" name="passwd" maxlength="20" style="width:150"></td>
 		</tr>
 		</tbody>
 	</table>

@@ -7,18 +7,16 @@
 	int ok=0;
 	request.setCharacterEncoding("UTF-8");
     	response.setCharacterEncoding("UTF-8");
-	if(request.getParameter("userID")!=null)
+	if(request.getParameter("email")!=null)
 	if(request.getParameter("passwd")!=null)
-	if(request.getParameter("userName")!=null)
-	if(request.getParameter("sex")!=null)
-	if(request.getParameter("birthYear")!=null)
-	if(request.getParameter("birthMonth")!=null){
-		String userID=request.getParameter("userID");
+	if(request.getParameter("username")!=null){
+		String email=request.getParameter("email");
 		String passwd=request.getParameter("passwd");
-		String userName= java.net.URLDecoder.decode(request.getParameter("userName"),"UTF-8");//获取请求参数  
+		String username= java.net.URLDecoder.decode(request.getParameter("username"),"UTF-8");//获取请求参数  
 		String sex=request.getParameter("sex");
-		String birthYear=request.getParameter("birthYear");
-		String birthMonth=request.getParameter("birthMonth");
+		String birthYear=request.getParameter("year");
+		String birthMonth=request.getParameter("month");
+        String birthDay=request.getParameter("day");
 
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://"
@@ -26,10 +24,10 @@
 			+ path + "/";
 
 		/** 链接数据库参数 **/
-		String driverName = "com.mysql.jdbc.Driver"; //驱动名称
+        String driverName = "com.mysql.jdbc.Driver"; //驱动名称
         String DBUser = "admin"; //mysql用户名
         String DBPasswd = "1234567890"; //mysql密码
-        String DBName = "teaching"; //数据库名
+        String DBName = "working"; //数据库名
         String MySQLServer = "127.0.0.1"; //MySQL地址
         String MySQLServerPort = "3306"; //MySQL端口号（默认为3306）
 
@@ -50,12 +48,15 @@
 		stmt.executeQuery("SET NAMES UTF8");
 
 		//要执行的 sql 查询
-		String sql = "SELECT * FROM `teaching`.`account` where userID='"+userID+"' LIMIT 1";
+		String sql = "SELECT * FROM `working`.`user` where email='"+email+"' LIMIT 1";
 		//取得结果
 		ResultSet rs = stmt.executeQuery(sql);
 		if (!rs.next()){
-			sql = "INSERT INTO `teaching`.`account` VALUES('"+userID+"','"+passwd+"','"+userName+"','"+sex+"',"+birthYear+","+birthMonth+")";
+			sql = "INSERT INTO `working`.`user` (email, passwd, username) VALUES('"+email+"','"+passwd+"','"+username +"')";
 			System.out.println(sql);
+			stmt.execute(sql);
+            sql = "INSERT INTO `working`.`userdetail` (email, sex, year, month, day) VALUES ('"+email+"','"+sex+"',"+birthYear+","+birthMonth+","+birthDay+")";
+            System.out.println(sql);
 			stmt.execute(sql);
 			ok=1;
 		}
@@ -66,7 +67,7 @@
 	}
 %>
 
-<body bgcolor="papayawhip">
+<body>
 <%
 if (ok==1){
 	out.println("<p>注册成功！！</p>");
@@ -74,7 +75,7 @@ if (ok==1){
 	String content=5+";URL="+"login.jsp";
 	response.setHeader("REFRESH",content); 
 }else{
-	out.println("<p>该用户名已占用！</p>");
+	out.println("<p>该邮箱已被注册！！</p>");
 	out.println("<p>5秒后返回注册页面！！</p>");
 	String content=5+";URL="+"register.jsp";
 	response.setHeader("REFRESH",content); 

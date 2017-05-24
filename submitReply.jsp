@@ -12,8 +12,9 @@
 	if(request.getParameter("words")!=null){
 		String content= java.net.URLDecoder.decode(request.getParameter("words"),"UTF-8");//获取请求参数  
 		String statementID=request.getParameter("statementID");//获取请求参数  
-		String userID=(String)session.getAttribute("userID");
-		String releaseTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()); 
+        String contentID=request.getParameter("contentID");
+		String email=(String)session.getAttribute("email");
+		String time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()); 
 
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://"
@@ -24,7 +25,7 @@
         String driverName = "com.mysql.jdbc.Driver"; //驱动名称
         String DBUser = "admin"; //mysql用户名
         String DBPasswd = "1234567890"; //mysql密码
-        String DBName = "teaching"; //数据库名
+        String DBName = "working"; //数据库名
         String MySQLServer = "127.0.0.1"; //MySQL地址
         String MySQLServerPort = "3306"; //MySQL端口号（默认为3306）
 
@@ -45,10 +46,20 @@
 		stmt.executeQuery("SET NAMES UTF8");
 
 		//要执行的 sql 查询
-		String sql = "INSERT INTO  `teaching`.`comment` (userID,statementID,releaseTime,content) VALUES ('"+userID+"','"+statementID+"','"+releaseTime+"','"+content+"')";
-		System.out.println("submitReply.jsp");
-		System.out.println(sql);
-		out.println(sql);
+        String sql1 = "SELECT * from `working`.`status` WHERE statusnum = '"+statementID+"';";
+        System.out.println(sql1);
+        ResultSet rs = stmt.executeQuery(sql1);
+        String email2 = email;
+        if (rs.next()){
+            email2=rs.getString("email");
+        }
+        sql1 = "SELECT * from `working`.`reply` WHERE replynum = '"+contentID+"';";
+        out.println(sql1);
+        rs = stmt.executeQuery(sql1);
+        if (rs.next()){
+            email2=rs.getString("email");
+        }
+		String sql = "INSERT INTO  `working`.`reply` (email,statusnum,time,reply,email2) VALUES ('"+email+"','"+statementID+"','"+time+"','"+content+"','" +email2+"')";
 		//取得结果
 		stmt.execute(sql);
 		/** 关闭连接 **/
