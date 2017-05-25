@@ -43,44 +43,12 @@
 	
 	String email=(String)session.getAttribute("email");
 	
-	String searchName=(String)request.getParameter("searchName");
-	System.out.println(searchName);
-	String sql=null;
-	
+	String sql="";	
 %>
 <html>
 <head>
-	<title>查找朋友</title>
+	<title>我的关注</title>
 	<meta http-equiv="content-Type" content="text/html;charset=UTF-8"> 
-	
-	<SCRIPT type="text/javascript">
-		function addFriend(email){
-			if (email!=""){
-				var xmlhttp=null;
-				if (window.XMLHttpRequest){
-					// code for IE7+, Firefox, Chrome, Opera, Safari
-					xmlhttp=new XMLHttpRequest();
-				}
-				else{
-					// code for IE6, IE5
-					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-				}
-				if (xmlhttp!=null){
-					xmlhttp.onreadystatechange=function(){
-						if (xmlhttp.readyState==4 && xmlhttp.status==200){
-							window.location.href="search.jsp?searchName=<%out.print(searchName);%>";
-							var s=document.getElementById(email);
-							s.innerHTML="已添加";
-						}
-					}
-					xmlhttp.open("GET","add.jsp?friendID="+email,true);
-					xmlhttp.send();
-				}
-			}else{
-				alert("请输入内容！");
-			}
-		}
-	</SCRIPT>
 </head>
 
 <body  align="center" style="width:700">
@@ -114,32 +82,19 @@
 	</table>
 	</div>
 	<hr  style="width:700" />
+	<%		
+	sql= "SELECT * FROM `working`.`friends` as a, `working`.`user` as b, `working`.`userdetail` as c where a.email2 = c.email and a.email2 = b.email and a.email = '" + email + "'";
+	//取得结果
+	System.out.println(sql);
+	rs = stmt.executeQuery(sql);
+	while (rs.next()){
+	%>
+	<div align="center" style="width:700" >
+	<li>
+	<a href="view.jsp?email=<%out.print(rs.getString("email2"));%>"><%out.print(rs.getString("username"));%></a> 性别：<%out.print(rs.getString("sex"));%> 生日：<%out.print(rs.getString("year"));%>年<%out.print(rs.getString("month"));%>月<%out.print(rs.getString("day"));%>日	
+	</li>
+	</div>
 	<%
-	if (searchName!=null){
-		
-		sql= "SELECT * FROM `working`.`user` as a, `working`.`userdetail` as b "
-			+"where username like '%"+searchName+"%' "
-            +"and a.email = b.email "
-			+"and a.email !='"+email+"' "
-			+"and a.email not in ( "
-			+"select email2 from `working`.`friends` where email='"+email+"'"
-			+");";
-		
-		//取得结果
-		System.out.println(sql);
-		rs = stmt.executeQuery(sql);
-		while (rs.next()){
-		%>
-		<div align="center" style="width:700" >
-		<li>
-		<a href="view.jsp?email=<%out.print(rs.getString("email"));%>"><%out.print(rs.getString("username"));%></a> 性别：<%out.print(rs.getString("sex"));%> 生日：<%out.print(rs.getString("year"));%>年<%out.print(rs.getString("month"));%>月<%out.print(rs.getString("day"));%>日
-		
-		<span id="<%out.print(rs.getString("email"));%>"><input type="button" value="加关注" onclick="addFriend('<%out.print(rs.getString("email"));%>')" /></span>
-		
-		</li>
-		</div>
-		<%
-		}
 	}
 	%>
 </body>
