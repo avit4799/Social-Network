@@ -155,7 +155,7 @@
 	<div align="center">
 	<table>
 	<tr>
-	<td style="width:400">Hi, <a href="main.jsp"><%
+	<td style="width:100">Hi, <a href="main.jsp"><%
 	sql= "SELECT * FROM `working`.`user` where email='"+email+"' LIMIT 15";
 	System.out.println(sql);
 
@@ -165,7 +165,13 @@
 		out.println(rs.getString("UserName"));
 	}%></a>
 	</td>
-	<td style="width:300">
+    <td style="width:100">
+    <a href="myFriends.jsp">我的关注</a>
+    </td>
+    <td style="width:100">
+    <a href="personalInfo.jsp">个人资料</a>
+    </td>
+	<td style="width:500">
 	<form action="search.jsp" method="post">
 		<input type="text" name="searchName" maxlength="20" style="width:120"/>
 		<input type="submit" value="查找好友" />
