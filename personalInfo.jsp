@@ -43,44 +43,12 @@
 	
 	String email=(String)session.getAttribute("email");
 	
-	String searchName=(String)request.getParameter("searchName");
-	System.out.println(searchName);
-	String sql=null;
-	
+	String sql="";	
 %>
 <html>
 <head>
-	<title>查找朋友</title>
+	<title>个人资料</title>
 	<meta http-equiv="content-Type" content="text/html;charset=UTF-8"> 
-	
-	<SCRIPT type="text/javascript">
-		function addFriend(email){
-			if (email!=""){
-				var xmlhttp=null;
-				if (window.XMLHttpRequest){
-					// code for IE7+, Firefox, Chrome, Opera, Safari
-					xmlhttp=new XMLHttpRequest();
-				}
-				else{
-					// code for IE6, IE5
-					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-				}
-				if (xmlhttp!=null){
-					xmlhttp.onreadystatechange=function(){
-						if (xmlhttp.readyState==4 && xmlhttp.status==200){
-							window.location.href="search.jsp?searchName=<%out.print(searchName);%>";
-							var s=document.getElementById(email);
-							s.innerHTML="已添加";
-						}
-					}
-					xmlhttp.open("GET","add.jsp?friendID="+email,true);
-					xmlhttp.send();
-				}
-			}else{
-				alert("请输入内容！");
-			}
-		}
-	</SCRIPT>
 </head>
 
 <body  align="center" style="width:700">
@@ -114,34 +82,63 @@
 	</table>
 	</div>
 	<hr  style="width:700" />
-	<%
-	if (searchName!=null){
-		
-		sql= "SELECT * FROM `working`.`user` as a, `working`.`userdetail` as b "
-			+"where username like '%"+searchName+"%' "
-            +"and a.email = b.email "
-			+"and a.email !='"+email+"' "
-			+"and a.email not in ( "
-			+"select email2 from `working`.`friends` where email='"+email+"'"
-			+");";
-		
-		//取得结果
-		System.out.println(sql);
-		rs = stmt.executeQuery(sql);
-		while (rs.next()){
-		%>
-		<div align="center" style="width:700" >
-		<li>
-		<a href="view.jsp?email=<%out.print(rs.getString("email"));%>"><%out.print(rs.getString("username"));%></a> 性别：<%out.print(rs.getString("sex"));%> 生日：<%out.print(rs.getString("year"));%>年<%out.print(rs.getString("month"));%>月<%out.print(rs.getString("day"));%>日
-		
-		<span id="<%out.print(rs.getString("email"));%>"><input type="button" value="加关注" onclick="addFriend('<%out.print(rs.getString("email"));%>')" /></span>
-		
-		</li>
-		</div>
-		<%
-		}
-	}
-	%>
+	<center>
+	<form action="modifyInfo.jsp" method="post">
+		<table border="2" bordercolor="black" bgcolor="">
+			<tbody>
+			<tr>
+				<td height="28">昵称</td>
+				<td><input type="text" name="username" maxlength="20" style="width:150" ></td>
+			</tr>
+            <tr>
+				<td height="28">头像（请引用网络位置）</td>
+				<td><input type="text" name="icon"  style="width:150"></td>
+			</tr>
+			<tr>
+				<td height="28">性别</td>
+				<td>
+				男<input type="radio" name="sex" value="男" />&nbsp;
+				女<input type="radio" name="sex" value="女" />&nbsp;
+                其他<input type="radio" name="sex" checked="selected" value="其他" />
+				</td>
+			</tr>
+			<tr>
+				<td height="28">生日</td>
+				<td>
+				<SELECT onclick="onSelect(this)" name="year">
+				<%
+					for (int i=1900;i<=2017;i++){
+						%><option value=<%=i%>><%=i%></option><%
+					}
+				%>
+				</SELECT>
+				<SELECT onclick="onSelect(this)" name="month">
+				<%
+					for (int i=1;i<=12;i++){
+						%><option value=<%=i%>><%=i%></option><%
+					}
+				%>
+				</SELECT>
+                <SELECT onclick="onSelect(this)" name="day">
+				<%
+					for (int i=1;i<=31;i++){
+						%><option value=<%=i%>><%=i%></option><%
+					}
+				%>
+				</SELECT>
+				</td>
+			</tr>
+            <tr>
+				<td height="28">一句话自我介绍</td>
+				<td><TEXTAREA type="text" name="introduction"  rows=4 cols=20 class="input_detail"></TEXTAREA></td>
+			</tr>
+			</tbody>
+		</table>
+        
+	<input type="submit" value="修改" >&nbsp;&nbsp; 
+	<input type="button" value="返回" onclick="location.href='main.jsp'">
+	</form>
+	</center>
 </body>
 </html>
 <%
