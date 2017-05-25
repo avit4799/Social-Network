@@ -152,6 +152,7 @@
 	</SCRIPT>
 </head>
 <body  align="center" style="width:700">
+    <%response.setIntHeader("Refresh", 30);%>
 	<div align="center">
 	<table>
 	<tr>
