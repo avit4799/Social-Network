@@ -21,11 +21,11 @@
 			<tbody>
 			<tr>
 				<td height="28">邮箱*</td>
-				<td><input type="text" name="email" maxlength="30" style="width:150" required="required"></td>
+				<td><input type="text" name="email" maxlength="30" style="width:150" required="required" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></td>
 			</tr>
 			<tr>
 				<td height="28">密码*</td>
-				<td><input type="text" name="passwd" maxlength="20" style="width:150" required="required"></td>
+				<td><input type="password" name="passwd" minlength="6" maxlength="20" style="width:150" required="required"></td>
 			</tr>
 			<tr>
 				<td height="28">昵称*</td>
