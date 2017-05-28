@@ -1,0 +1,50 @@
+\begin{tikzpicture}[
+  grow via three points={one child at (0.5,-0.7) and
+  two children at (0.5,-0.7) and (0.5,-1.4)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+\node[table]{Root Database}
+	child{node[table]{User}
+		child{node[table]{Email}}
+		child{node[table]{Username}}
+		child{node[table]{Passwd}}}
+	child [missing] {}
+	child [missing] {}
+	child [missing] {}
+	child{node[table]{Friends}
+		child{node[table]{Number}}
+		child{node[table]{Email}}
+		child{node[table]{Email2}}}
+	child [missing] {}
+	child [missing] {}
+	child [missing] {}
+	child{node[table]{Status}
+		child{node[table]{StatusNum}}
+		child{node[table]{Email}}
+		child{node[table]{Content}}
+		child{node[table]{Time}}}
+	child [missing] {}
+	child [missing] {}
+	child [missing] {}
+	child [missing] {}
+	child{node[table]{Reply}
+		child{node[table]{ReplyNum}}
+		child{node[table]{StatusNum}}
+		child{node[table]{Reply}}
+		child{node[table]{Email}}
+		child{node[table]{Time}}
+		child{node[table]{Email2}}}
+	child [missing] {}
+	child [missing] {}
+	child [missing] {}
+	child [missing] {}
+	child [missing] {}
+	child [missing] {}
+	child{node[table]{UserDetail}
+		child{node[table]{Email}}
+		child{node[table]{Sex}}
+		child{node[table]{Year}}
+		child{node[table]{Month}}
+		child{node[table]{Day}}
+		child{node[table]{Introduction}}
+		child{node[table]{Icon}}};
+\end{tikzpicture}

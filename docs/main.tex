@@ -1,12 +1,12 @@
 \input{header.tex}
 
 \begin{document}
-%\tikzstyle{every node}=[draw=black,anchor=west]
+\tikzstyle{table}=[draw=black,anchor=west]
 %\tikzstyle{selected}=[draw=red,fill=red!30]
 %\tikzstyle{optional}=[dashed,fill=gray!50]
 \title{
         \HRule{2pt}\\
-        \LARGE \textbf{\uppercase{Documentation}}
+        \LARGE \textbf{\uppercase{Documentation of\\ Social Network Project}}
         \HRule{2pt} \\ [0.5cm]
         \normalsize \today \vspace*{5\baselineskip}}
 
@@ -20,17 +20,98 @@
 \thispagestyle{empty}
 \newpage
 
-\section*{Introduction}
-\addcontentsline{toc}{section}{Introduction}
+\section{Introduction}
+%\addcontentsline{toc}{section}{Introduction}
 
-\section{Structure}
+This project aims to build a social network with JSP and MySQL, implementing functions as the following.
 
+\subsection{Main Features}
+\begin{itemize}
+	\item Support signing up \& in with email regex check
+	\item Search for contacts
+	\item Post status and reply
+	\item 30 secs refreshment
+\end{itemize}
+
+\subsection{Components}
+\begin{itemize}
+	\item Apache, Tomcat, Apache-Tomcat-Connector
+	\item MySQL, MySQL Connector/J (JDBC)
+\end{itemize}
+
+Visit our project site at \href{http://54.250.244.23/database-project/db/main.jsp}{Database Course Project}.
+
+\section{Environment}
+
+This project is hosted on Amazon Linux AMI server provided by AWS. To build the environment for running our website, we took steps as below.
+
+\begin{enumerate}
+	\item install OpenJDK-1.8.0
+	\item install and configure Apache (httpd) \& Tomcat
+	\item link Apache and Tomcat with Apache Tomcat Connector \footnote{This makes it possible to run static web pages on Apache and dynamic ones on Tomcat}
+	\item install MySQL and prepare MySQL connector/J in WEB-INF/lib
+\end{enumerate}
+
+While building runtime environment, there's some trouble when I'm trying to link Apache with Tomcat. It does cost a lot of time to Google for the right configuration, but finally it goes well.
+
+In addition, MySQL is case insensitive for Windows and MacOS, but that's not true for table names in Linux. One needs to configure it manually by adding lower\_case\_table\_names=1 to /etc/my.cnf, which quite confused me for a long time.
+
+Note: we've taken GitHub for convenient teamwork. Our project is being maintained at \url{https://github.com/PKU-2017-Database/Social-Network}.
+
+\section{Data Structure}
+
+\subsection{Entity-Relationship Diagram}
+
+We refer to the ER Diagram provided by TA. Here is an English version of that ER Diagram redrawn by \LaTeX.
+
+\begin{figure}[htbp]
+	\begin{center}
+		\input{erd.tex}
+	\end{center}
+	\caption{Entity-Relationship Diagram}
+\end{figure}
+
+\subsection{MySQL Table}
+
+According to the above ER Diagram, we've designed MySQL tables as below.
+
+\begin{figure}[htbp]
 \begin{center}
-\input{erd.tex}
+\input{sqltb.tex}
 \end{center}
+\caption{MySQL Table Structure}
+\end{figure}
 
-\newpage
-\section*{Appendix}
-\addcontentsline{toc}{section}{Appendix}
+Details about the attributes:
+
+\input{tbdetail.tex}
+
+\section{Division of Labor}
+
+Our group members:
+
+\begin{table}[htbp]
+	\begin{center}
+		\input{grpmem.tex}
+	\end{center}
+	\caption{Group Members}
+\end{table}
+
+Division of labor:
+
+\begin{itemize}
+	\item He Yan: write documentation for project via \LaTeX
+	\item Sun Meng: CSS design of website
+	\item Wu Chuchuan: HTML (via JSP or PHP) and database
+\end{itemize}
+
+\section{References}
+
+\begin{itemize}
+	\item Guidebook, installers and demo provided at \url{course.pku.edu.cn}
+	\item \LaTeX \, template provided by \href{https://www.overleaf.com/latex/templates/project-template-titlepage/bwmhgfdvvhpw}{Overleaf}
+\end{itemize}
+
+%Running picture
 
 \end{document}

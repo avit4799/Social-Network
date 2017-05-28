@@ -9,4 +9,3 @@ docs: *.tex
 
 clean:
 	rm -f $(MAIN).aux $(MAIN).aux $(MAIN).log $(MAIN).out $(MAIN).toc missfont.log
-
