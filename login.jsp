@@ -45,7 +45,7 @@ font-weight: bold;
 	<table border="2" bordercolor="black" bgcolor="">
 		<tbody>
 		<tr>
-			<td height="28"><span class="style5">邮箱：</span> <input type="text" name="email" maxlength="30" style="width:150"></td>
+			<td height="28"><span class="style5">邮箱：</span> <input type="text" name="email" maxlength="30" style="width:150" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></td>
 		</tr>
 		<tr>
 			<td><span class="style5">密码：</span> <input type="password" name="passwd" maxlength="20" style="width:150"></td>
