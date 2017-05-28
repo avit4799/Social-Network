@@ -1,0 +1,40 @@
+\begin{itemize}
+	\item User - deal with signing up \& in
+		\begin{itemize}
+			\item Email: primary key to identify users in registration and log-in
+			\item Username: nickname, which can be edited after registration
+			\item Passwd: password to validate a user
+		\end{itemize}
+	\item Friends - record friend relationships
+		\begin{itemize}
+			\item Number: auto-increment primary key for identification
+			\item Email: follower's email
+			\item Email2: followee's email
+		\end{itemize}
+	\item Status - store posted statuses
+		\begin{itemize}
+			\item StatusNum: auto-increment primary key for identification
+			\item Email: poster's email
+			\item Content: posted contents
+			\item Time: posting time
+		\end{itemize}
+	\item Reply - store posted replies to status
+		\begin{itemize}
+			\item ReplyNum: auto-increment primary key for identification
+			\item StatusNum: replied status number
+			\item Reply: reply contents
+			\item Email: replier's email
+			\item Time: replying time
+			\item Email2: repliee's email
+		\end{itemize}
+	\item UserDetail - store user details
+		\begin{itemize}
+			\item Email: primary \& foreign key pointing to User.Email
+			\item Sex: user's sex
+			\item Year: user's year of birth
+			\item Month: user's month of birth
+			\item Day: user's day of birth
+			\item Introduction: simple introduction to the user
+			\item Icon: user's avatar
+		\end{itemize}
+\end{itemize}
