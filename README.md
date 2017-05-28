@@ -39,7 +39,7 @@ A project to implement social network mainly through MySQL.
 5. UserDetail表
 用于记录用户的个人信息。属性结构：
 * EMAIL CHAR(30) PRIMARY KEY 用户的email，这个属性指向User.EMAIL作为外键
-FOREIGN KEY (EMAIL) REFERENCES User(EMAIL)
+* FOREIGN KEY (EMAIL) REFERENCES User(EMAIL)
 * SEX CHAR(3) 用户的性别
 * YEAR INT 用户出生年
 * MONTH INT 用户出生月
