@@ -23,19 +23,27 @@
 \section{Introduction}
 %\addcontentsline{toc}{section}{Introduction}
 
-This project aims to build a social network with JSP and MySQL, implementing functions as the following.
+This project aims to build a social network with JSP and MySQL.
 
 \subsection{Main Features}
 \begin{itemize}
-	\item Support signing up \& in with email regex check
-	\item Search for contacts
-	\item Post status and reply
-	\item 30 secs refreshment
+	\item \emph{Compulsory}:
+		\begin{itemize}
+			\item Support signing up \& in
+			\item Search for contacts \& Post status and reply
+			\item 30 secs refreshment
+		\end{itemize}
+	\item \emph{Optional}:
+		\begin{itemize}
+			\item Email address regex check
+			\item Add Google's reCaptcha\footnote{Completely Automated Public Turing test to tell Computers and Humans Apart} validation
+		\end{itemize}
 \end{itemize}
 
 \subsection{Components}
 \begin{itemize}
-	\item Apache, Tomcat, Apache-Tomcat-Connector
+	\item Apache, Tomcat
+	\item Apache-Tomcat-Connector
 	\item MySQL, MySQL Connector/J (JDBC)
 \end{itemize}
 
@@ -48,13 +56,9 @@ This project is hosted on Amazon Linux AMI server provided by AWS. To build the 
 \begin{enumerate}
 	\item install OpenJDK-1.8.0
 	\item install and configure Apache (httpd) \& Tomcat
-	\item link Apache and Tomcat with Apache Tomcat Connector \footnote{This makes it possible to run static web pages on Apache and dynamic ones on Tomcat}
-	\item install MySQL and prepare MySQL connector/J in WEB-INF/lib
+	\item link Apache and Tomcat with Apache Tomcat Connector \footnote{This makes it possible to run static web pages on Apache and dynamic ones on Tomcat.}
+	\item install MySQL\footnote{MySQL is case insensitive for Windows and MacOS, but that's not true for Linux.} and prepare MySQL connector/J in WEB-INF/lib
 \end{enumerate}
-
-While building runtime environment, there's some trouble when I'm trying to link Apache with Tomcat. It does cost a lot of time to Google for the right configuration, but finally it goes well.
-
-In addition, MySQL is case insensitive for Windows and MacOS, but that's not true for table names in Linux. One needs to configure it manually by adding lower\_case\_table\_names=1 to /etc/my.cnf, which quite confused me for a long time.
 
 Note: we've taken GitHub for convenient teamwork. Our project is being maintained at \url{https://github.com/PKU-2017-Database/Social-Network}.
 
@@ -110,6 +114,8 @@ Division of labor:
 \begin{itemize}
 	\item Guidebook, installers and demo provided at \url{course.pku.edu.cn}
 	\item \LaTeX \, template provided by \href{https://www.overleaf.com/latex/templates/project-template-titlepage/bwmhgfdvvhpw}{Overleaf}
+	\item \href{https://dev.mysql.com/downloads/connector/j/}{mysql-connector-java-5.1.42-bin.jar}
+	\item \href{https://mvnrepository.com/artifact/javax.json/javax.json-api/1.1}{javax.json-api-1.1.jar}
 \end{itemize}
 
 %Running picture
