@@ -157,7 +157,7 @@
 		out.print("Gender: "+rs.getString("sex")+" ");
 		out.print("Date of birth: "+rs.getString("year")+"/");
 		out.print(rs.getString("month")+"/");
-        out.print(rs.getString("day"));
+        	out.print(rs.getString("day"));
 	}%>
 	</p>
 	</div>

@@ -91,7 +91,7 @@
 	%>
 	<div align="center" style="width:700" >
 	<li>
-	<a href="view.jsp?email=<%out.print(rs.getString("email2"));%>"><%out.print(rs.getString("username"));%></a>Gender: <%out.print(rs.getString("sex"));%>Date of birth: <%out.print(rs.getString("year"));%>/<%out.print(rs.getString("month"));%>/<%out.print(rs.getString("day"));%>	
+	<a href="view.jsp?email=<%out.print(rs.getString("email2"));%>"><%out.print(rs.getString("username"));%></a>&nbsp;Gender: <%out.print(rs.getString("sex"));%>&nbsp;Date of birth: <%out.print(rs.getString("year"));%>/<%out.print(rs.getString("month"));%>/<%out.print(rs.getString("day"));%>	
 	</li>
 	</div>
 	<%
