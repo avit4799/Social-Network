@@ -9,12 +9,12 @@
 
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
-	
+
 	String path = request.getContextPath();
 		String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
+
 	/** 链接数据库参数 **/
 	String driverName = "com.mysql.jdbc.Driver"; //驱动名称
     String DBUser = "admin"; //mysql用户名
@@ -40,15 +40,15 @@
 	stmt.executeQuery("SET NAMES UTF8");
 
 	//要执行的 sql 查询
-	
+
 	String email=(String)session.getAttribute("email");
-	
-	String sql="";	
+
+	String sql="";
 %>
 <html>
 <head>
-	<title>我的关注</title>
-	<meta http-equiv="content-Type" content="text/html;charset=UTF-8"> 
+	<title>Following</title>
+	<meta http-equiv="content-Type" content="text/html;charset=UTF-8">
 </head>
 
 <body  align="center" style="width:700">
@@ -66,23 +66,23 @@
 	}%></a>
 	</td>
     <td style="width:100">
-    <a href="myFriends.jsp">我的关注</a>
+    <a href="myFriends.jsp">Following</a>
     </td>
     <td style="width:100">
-    <a href="personalInfo.jsp">个人资料</a>
+    <a href="personalInfo.jsp">Profile</a>
     </td>
 	<td style="width:500">
 	<form action="search.jsp" method="post">
 		<input type="text" name="searchName" maxlength="20" style="width:120"/>
-		<input type="submit" value="查找好友" />
-		<input type="button" value="退出登录" onclick="location.href='logout.jsp'" />
+		<input type="submit" value="Find friends" />
+		<input type="button" value="Sign out" onclick="location.href='logout.jsp'" />
 	</form>
 	</td>
 	</tr>
 	</table>
 	</div>
 	<hr  style="width:700" />
-	<%		
+	<%
 	sql= "SELECT * FROM `working`.`friends` as a, `working`.`user` as b, `working`.`userdetail` as c where a.email2 = c.email and a.email2 = b.email and a.email = '" + email + "'";
 	//取得结果
 	System.out.println(sql);
@@ -91,7 +91,7 @@
 	%>
 	<div align="center" style="width:700" >
 	<li>
-	<a href="view.jsp?email=<%out.print(rs.getString("email2"));%>"><%out.print(rs.getString("username"));%></a> 性别：<%out.print(rs.getString("sex"));%> 生日：<%out.print(rs.getString("year"));%>年<%out.print(rs.getString("month"));%>月<%out.print(rs.getString("day"));%>日	
+	<a href="view.jsp?email=<%out.print(rs.getString("email2"));%>"><%out.print(rs.getString("username"));%></a>Gender: <%out.print(rs.getString("sex"));%>Date of birth: <%out.print(rs.getString("year"));%>/<%out.print(rs.getString("month"));%>/<%out.print(rs.getString("day"));%>	
 	</li>
 	</div>
 	<%

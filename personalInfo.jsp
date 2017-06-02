@@ -9,12 +9,12 @@
 
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
-	
+
 	String path = request.getContextPath();
 		String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
+
 	/** 链接数据库参数 **/
 	String driverName = "com.mysql.jdbc.Driver"; //驱动名称
     String DBUser = "admin"; //mysql用户名
@@ -40,15 +40,15 @@
 	stmt.executeQuery("SET NAMES UTF8");
 
 	//要执行的 sql 查询
-	
+
 	String email=(String)session.getAttribute("email");
-	
-	String sql="";	
+
+	String sql="";
 %>
 <html>
 <head>
-	<title>个人资料</title>
-	<meta http-equiv="content-Type" content="text/html;charset=UTF-8"> 
+	<title>Profile</title>
+	<meta http-equiv="content-Type" content="text/html;charset=UTF-8">
 </head>
 
 <body  align="center" style="width:700">
@@ -66,16 +66,16 @@
 	}%></a>
 	</td>
     <td style="width:100">
-    <a href="myFriends.jsp">我的关注</a>
+    <a href="myFriends.jsp">Following</a>
     </td>
     <td style="width:100">
-    <a href="personalInfo.jsp">个人资料</a>
+    <a href="personalInfo.jsp">Profile</a>
     </td>
 	<td style="width:500">
 	<form action="search.jsp" method="post">
 		<input type="text" name="searchName" maxlength="20" style="width:120"/>
-		<input type="submit" value="查找好友" />
-		<input type="button" value="退出登录" onclick="location.href='logout.jsp'" />
+		<input type="submit" value="Find friends" />
+		<input type="button" value="Sign out" onclick="location.href='logout.jsp'" />
 	</form>
 	</td>
 	</tr>
@@ -87,23 +87,23 @@
 		<table border="2" bordercolor="black" bgcolor="">
 			<tbody>
 			<tr>
-				<td height="28">昵称</td>
+				<td height="28">Name</td>
 				<td><input type="text" name="username" maxlength="20" style="width:150" ></td>
 			</tr>
             <tr>
-				<td height="28">头像（请引用网络位置）</td>
+				<td height="28">Avatar</td>
 				<td><input type="text" name="icon"  style="width:150"></td>
 			</tr>
 			<tr>
-				<td height="28">性别</td>
+				<td height="28">Gender</td>
 				<td>
-				男<input type="radio" name="sex" value="男" />&nbsp;
-				女<input type="radio" name="sex" value="女" />&nbsp;
-                其他<input type="radio" name="sex" checked="selected" value="其他" />
+				Male<input type="radio" name="sex" value="Male" />&nbsp;
+				Female<input type="radio" name="sex" value="Female" />&nbsp;
+                Others<input type="radio" name="sex" checked="selected" value="Others" />
 				</td>
 			</tr>
 			<tr>
-				<td height="28">生日</td>
+				<td height="28">Date of birth</td>
 				<td>
 				<SELECT onclick="onSelect(this)" name="year">
 				<%
@@ -129,14 +129,14 @@
 				</td>
 			</tr>
             <tr>
-				<td height="28">一句话自我介绍</td>
+				<td height="28">Introduction: </td>
 				<td><TEXTAREA type="text" name="introduction"  rows=4 cols=20 class="input_detail"></TEXTAREA></td>
 			</tr>
 			</tbody>
 		</table>
-        
-	<input type="submit" value="修改" >&nbsp;&nbsp; 
-	<input type="button" value="返回" onclick="location.href='main.jsp'">
+
+	<input type="submit" value="Submit" >&nbsp;&nbsp;
+	<input type="button" value="Back" onclick="location.href='main.jsp'">
 	</form>
 	</center>
 </body>
