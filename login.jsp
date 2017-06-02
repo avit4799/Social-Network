@@ -51,21 +51,21 @@ font-weight: bold;
 <form action="loginResponse.jsp" method="post">
 	<table border="2" bordercolor="black" bgcolor="">
 		<tbody>
-		<tr>
-			<td height="28"><span class="style5">Email:</span> <input type="text" name="email" maxlength="30" style="width:150" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></td>
+		<tr height="28">
+			<th><span class="style5">Email:</span></th><td> <input type="text" name="email" maxlength="30" style="width:150" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></td>
 		</tr>
 		<tr>
-			<td><span class="style5">Password:</span> <input type="password" name="passwd" maxlength="20" style="width:150"></td>
+			<th><span class="style5">Password:</span></th><td> <input type="password" name="passwd" maxlength="20" style="width:150"></td>
 		</tr>
-
-
-		<!-- added part -->
-			<div class="g-recaptcha" data-sitekey="6LdDNiMUAAAAAHDPfsdqqPKAPFEy5Xi3EoGwJIXi"></div>
-		<!-- added part -->
-
-
 		</tbody>
 	</table>
+
+
+	<!-- added part -->
+		<div class="g-recaptcha" data-sitekey="6LdDNiMUAAAAAHDPfsdqqPKAPFEy5Xi3EoGwJIXi"></div>
+	<!-- added part -->
+
+
 	<div align="center">
 		<input type="submit" value="Sign in" />&nbsp;&nbsp;
 		<input type="button" value="Sign up" onclick="location.href='register.jsp'"/>
