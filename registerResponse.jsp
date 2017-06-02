@@ -12,7 +12,7 @@
 	if(request.getParameter("username")!=null){
 		String email=request.getParameter("email");
 		String passwd=request.getParameter("passwd");
-		String username= java.net.URLDecoder.decode(request.getParameter("username"),"UTF-8");//获取请求参数  
+		String username= java.net.URLDecoder.decode(request.getParameter("username"),"UTF-8");//获取请求参数
 		String sex=request.getParameter("sex");
 		String birthYear=request.getParameter("year");
 		String birthMonth=request.getParameter("month");
@@ -70,15 +70,15 @@
 <body>
 <%
 if (ok==1){
-	out.println("<p>注册成功！！</p>");
-	out.println("<p>5秒后返回<a href=\"login.jsp\">登陆</a>页面！</p>");
+	out.println("<p>You've successfully signed up!</p>");
+	out.println("<p>Back to <a href=\"login.jsp\">Sign in</a> webpage after 5 secs...</p>");
 	String content=5+";URL="+"login.jsp";
-	response.setHeader("REFRESH",content); 
+	response.setHeader("REFRESH",content);
 }else{
-	out.println("<p>该邮箱已被注册！！</p>");
-	out.println("<p>5秒后返回注册页面！！</p>");
+	out.println("<p>This email has been already used!</p>");
+	out.println("<p>Back to <a href=\"register.jsp\">Sign up</a> webpage after 5 secs...</p>");
 	String content=5+";URL="+"register.jsp";
-	response.setHeader("REFRESH",content); 
+	response.setHeader("REFRESH",content);
 }
 %>
 </body>

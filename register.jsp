@@ -32,7 +32,7 @@
 </head>
 	<body>
 
-	<div align="center" class="style1 style2" ><b>ç”¨ æˆ· æ³¨ å†Œ</b>
+	<div align="center" class="style1 style2" ><b>ç”? æˆ? æ³? å†?</b>
 
 	<center>
 	<form action="registerResponse.jsp" method="post">
@@ -53,8 +53,8 @@
 			<tr>
 				<td height="58">æ€§åˆ«</td>
 				<td>
-				ç”·<input type="radio" name="sex" value="ç”·" />&nbsp;
-				å¥³<input type="radio" name="sex" value="å¥³" />&nbsp;
+				ç”?<input type="radio" name="sex" value="ç”?" />&nbsp;
+				å¥?<input type="radio" name="sex" value="å¥?" />&nbsp;
                 å…¶ä»–<input type="radio" name="sex" checked="selected" value="å…¶ä»–" />
 				</td>
 			</tr>

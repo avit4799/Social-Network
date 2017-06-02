@@ -18,7 +18,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>系统登录</title>
+		<title>Sign in</title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -46,16 +46,16 @@ font-weight: bold;
 <body width="300" height="300">
 <center>
 
-<div align="center" class="style1 style2">系 统 登 录
+<div align="center" class="style1 style2">Log in
 </div>
 <form action="loginResponse.jsp" method="post">
 	<table border="2" bordercolor="black" bgcolor="">
 		<tbody>
 		<tr>
-			<td height="28"><span class="style5">邮箱：</span> <input type="text" name="email" maxlength="30" style="width:150" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></td>
+			<td height="28"><span class="style5">Email:</span> <input type="text" name="email" maxlength="30" style="width:150" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></td>
 		</tr>
 		<tr>
-			<td><span class="style5">密码：</span> <input type="password" name="passwd" maxlength="20" style="width:150"></td>
+			<td><span class="style5">Password:</span> <input type="password" name="passwd" maxlength="20" style="width:150"></td>
 		</tr>
 
 
@@ -67,8 +67,8 @@ font-weight: bold;
 		</tbody>
 	</table>
 	<div align="center">
-		<input type="submit" value="登录" />&nbsp;&nbsp;
-		<input type="button" value="注册" onclick="location.href='register.jsp'"/>
+		<input type="submit" value="Sign in" />&nbsp;&nbsp;
+		<input type="button" value="Sign up" onclick="location.href='register.jsp'"/>
 	</div>
 </form>
 </center>

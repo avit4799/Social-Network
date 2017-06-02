@@ -9,12 +9,12 @@
 
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
-	
+
 	String path = request.getContextPath();
 		String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
+
 	/** 链接数据库参数 **/
 	String driverName = "com.mysql.jdbc.Driver"; //驱动名称
     String DBUser = "admin"; //mysql用户名
@@ -40,19 +40,19 @@
 	stmt.executeQuery("SET NAMES UTF8");
 
 	//要执行的 sql 查询
-	
+
 	String email=(String)session.getAttribute("email");
-	
+
 	String searchName=(String)request.getParameter("searchName");
 	System.out.println(searchName);
 	String sql=null;
-	
+
 %>
 <html>
 <head>
-	<title>查找朋友</title>
-	<meta http-equiv="content-Type" content="text/html;charset=UTF-8"> 
-	
+	<title>Find friends</title>
+	<meta http-equiv="content-Type" content="text/html;charset=UTF-8">
+
 	<SCRIPT type="text/javascript">
 		function addFriend(email){
 			if (email!=""){
@@ -70,14 +70,14 @@
 						if (xmlhttp.readyState==4 && xmlhttp.status==200){
 							window.location.href="search.jsp?searchName=<%out.print(searchName);%>";
 							var s=document.getElementById(email);
-							s.innerHTML="已添加";
+							s.innerHTML="Followed";
 						}
 					}
 					xmlhttp.open("GET","add.jsp?friendID="+email,true);
 					xmlhttp.send();
 				}
 			}else{
-				alert("请输入内容！");
+				alert("Input something!");
 			}
 		}
 	</SCRIPT>
@@ -98,16 +98,16 @@
 	}%></a>
 	</td>
     <td style="width:100">
-    <a href="myFriends.jsp">我的关注</a>
+    <a href="myFriends.jsp">Following</a>
     </td>
     <td style="width:100">
-    <a href="personalInfo.jsp">个人资料</a>
+    <a href="personalInfo.jsp">Profile</a>
     </td>
 	<td style="width:500">
 	<form action="search.jsp" method="post">
 		<input type="text" name="searchName" maxlength="20" style="width:120"/>
-		<input type="submit" value="查找好友" />
-		<input type="button" value="退出登录" onclick="location.href='logout.jsp'" />
+		<input type="submit" value="Find friends" />
+		<input type="button" value="Sign out" onclick="location.href='logout.jsp'" />
 	</form>
 	</td>
 	</tr>
@@ -116,7 +116,7 @@
 	<hr  style="width:700" />
 	<%
 	if (searchName!=null){
-		
+
 		sql= "SELECT * FROM `working`.`user` as a, `working`.`userdetail` as b "
 			+"where username like '%"+searchName+"%' "
             +"and a.email = b.email "
@@ -124,7 +124,7 @@
 			+"and a.email not in ( "
 			+"select email2 from `working`.`friends` where email='"+email+"'"
 			+");";
-		
+
 		//取得结果
 		System.out.println(sql);
 		rs = stmt.executeQuery(sql);
@@ -132,10 +132,10 @@
 		%>
 		<div align="center" style="width:700" >
 		<li>
-		<a href="view.jsp?email=<%out.print(rs.getString("email"));%>"><%out.print(rs.getString("username"));%></a> 性别：<%out.print(rs.getString("sex"));%> 生日：<%out.print(rs.getString("year"));%>年<%out.print(rs.getString("month"));%>月<%out.print(rs.getString("day"));%>日
-		
-		<span id="<%out.print(rs.getString("email"));%>"><input type="button" value="加关注" onclick="addFriend('<%out.print(rs.getString("email"));%>')" /></span>
-		
+		<a href="view.jsp?email=<%out.print(rs.getString("email"));%>"><%out.print(rs.getString("username"));%></a> Gender: <%out.print(rs.getString("sex"));%>Date of birth: <%out.print(rs.getString("year"));%>/<%out.print(rs.getString("month"));%>/<%out.print(rs.getString("day"));%>
+
+		<span id="<%out.print(rs.getString("email"));%>"><input type="button" value="Follow" onclick="addFriend('<%out.print(rs.getString("email"));%>')" /></span>
+
 		</li>
 		</div>
 		<%

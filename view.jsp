@@ -40,26 +40,26 @@
 	//设置字符集
 	stmt.executeQuery("SET NAMES UTF8");
 
-	
+
 	//申明～？
 	Statement stmt2 = conn.createStatement();
 
 	//设置字符集
 	stmt2.executeQuery("SET NAMES UTF8");
-	
+
 	//要执行的 sql 查询
 	String sql;
-	
-	
+
+
 %>
 <html>
 <head>
-	<title>简易社交网络</title>
-	<meta http-equiv="content-Type" content="text/html;charset=UTF-8"> 
+	<title>Social Network</title>
+	<meta http-equiv="content-Type" content="text/html;charset=UTF-8">
 	<style>
 		.comment{
-			border-style: dashed; 
-			border-width: 1px 0px 0px 0px; 
+			border-style: dashed;
+			border-width: 1px 0px 0px 0px;
 			border-color: "#202020";
 		}
 	</style>
@@ -95,7 +95,7 @@
 				if (xmlhttp!=null){
 					xmlhttp.onreadystatechange=function(){
 						if (xmlhttp.readyState==4 && xmlhttp.status==200){
-						
+
 							window.location.reload();
 						}
 					}
@@ -106,7 +106,7 @@
 					xmlhttp.send();
 				}
 			}else{
-				alert("请输入内容！");
+				alert("Input something!");
 			}
 		}
 	</SCRIPT>
@@ -126,16 +126,16 @@
 	}%></a>
 	</td>
     <td style="width:100">
-    <a href="myFriends.jsp">我的关注</a>
+    <a href="myFriends.jsp">Following</a>
     </td>
     <td style="width:100">
-    <a href="personalInfo.jsp">个人资料</a>
+    <a href="personalInfo.jsp">Profile</a>
     </td>
 	<td style="width:500">
 	<form action="search.jsp" method="post">
 		<input type="text" name="searchName" maxlength="20" style="width:120"/>
-		<input type="submit" value="查找好友" />
-		<input type="button" value="退出登录" onclick="location.href='logout.jsp'" />
+		<input type="submit" value="Find friends" />
+		<input type="button" value="Sign out" onclick="location.href='logout.jsp'" />
 	</form>
 	</td>
 	</tr>
@@ -154,10 +154,10 @@
 	if (rs.next()){
 		targetName=rs.getString("username");
 		out.print(targetName+" ");
-		out.print("性别："+rs.getString("sex")+" ");
-		out.print("生日："+rs.getString("year")+"年");
-		out.print(rs.getString("month")+"月");
-        out.print(rs.getString("day")+"日");
+		out.print("Gender: "+rs.getString("sex")+" ");
+		out.print("Date of birth: "+rs.getString("year")+"/");
+		out.print(rs.getString("month")+"/");
+        out.print(rs.getString("day"));
 	}%>
 	</p>
 	</div>
@@ -167,7 +167,7 @@
 		+	"where email='"+ targetEmail+"' "
 	+"order by time desc "
 	+"limit 0,50;";
-	
+
 	//取得结果
 	rs = stmt.executeQuery(sql);
 	while (rs.next()){
@@ -176,7 +176,7 @@
 	<hr width="700"/>
 	<table bgcolor="">
 		<tr height="">
-		
+
 	<td  width="500"><font size="4" color="black"><a href="view.jsp?email=<%out.print(targetEmail);%>"><%out.print(targetName);%></a>:</font>
 	</td>
 	</tr>
@@ -185,13 +185,13 @@
 	</td>
 	<td width="110"><font size="3" color="gray"><%out.print(rs.getString("time"));%></font>
 	</td>
-	<td width="60"><a href="javascript:reply('<%out.print(rs.getString("statusnum"));%>', '0')">回复</a><td>
+	<td width="60"><a href="javascript:reply('<%out.print(rs.getString("statusnum"));%>', '0')">Reply</a><td>
 	</tr>
     <tr height="10">
 	<td  width="650">
     <div>
 	<input style="display:none; height:25;width:500" id="<%out.print(rs.getString("statusnum"));%>,0" value=""/>
-	<input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,0Button" value="确定" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>',0)"/>
+	<input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,0Button" value="Submit" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>',0)"/>
 	</div>
     </td>
 	</tr>
@@ -208,24 +208,24 @@
 	while (rs2.next()){
 	%>
 	<tr height="">
-		
+
 	<td class="comment" width="500"><font size="3" color="black">
-    <a href="view.jsp?email=<%out.print(rs2.getString("email"));%>"><%out.print(rs2.getString("username"));%></a>回复:<a href="view.jsp?email=<%out.print(rs2.getString("email2"));%>"><%out.print(rs2.getString("username2"));%></a>
+    <a href="view.jsp?email=<%out.print(rs2.getString("email"));%>"><%out.print(rs2.getString("username"));%></a>Replies:<a href="view.jsp?email=<%out.print(rs2.getString("email2"));%>"><%out.print(rs2.getString("username2"));%></a>
     </font><font size="4" color="black"><%out.print(rs2.getString("reply"));%></font>
 	</td>
 	<td  class="comment" width="110"><font size="3" color="gray"><%out.print(rs2.getString("time"));%></font>
 	</td>
-	<td  class="comment" width="60"><a href="javascript:reply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')">回复</a><td>
+	<td  class="comment" width="60"><a href="javascript:reply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')">Reply</a><td>
 	</tr>
     <tr height="10">
 	<td  width="650">
     <div>
 	<input style="display:none; height:25;width:500" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>" value=""/>
-	<input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>Button" value="确定" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')"/>
+	<input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>Button" value="Submit" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')"/>
 	</div>
     </td>
 	</tr>
-    
+
 	<%
 	}
 	rs2.close();
