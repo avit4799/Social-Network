@@ -17,7 +17,7 @@
   \path (rel1) edge [double distance=1.5pt] (node1);
 
   \node[relationship] (rel2) [above right = of node1] {Post Status};
-  \node[relationship] (rel3) [below right = of node1] {Post Comment};
+  \node[relationship] (rel3) [below right = of node1] {Post Reply};
 
   \node[entity] (node3) [right = 2.5cm of node1] {Status}
     [grow=right, sibling distance=1cm, level distance=3cm]
@@ -26,9 +26,9 @@
     child {node[attribute] {\underline{Status ID}}};
 
 
-    \node[entity] (node2) [below = of rel3] {Comment}
+    \node[entity] (node2) [below = of rel3] {Reply}
       [sibling distance=3cm]
-      child {node[attribute] {\underline{Comment ID}}}
+      child {node[attribute] {\underline{Reply ID}}}
       child {node[attribute] {Time}}
       child {node[attribute] {Contents}};
 
