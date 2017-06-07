@@ -1,0 +1,14 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.0.1}
+\contentsline {subsection}{\numberline {1.1}Main Features}{1}{subsection.0.1.1}
+\contentsline {subsection}{\numberline {1.2}Components}{1}{subsection.0.1.2}
+\contentsline {section}{\numberline {2}Environment}{1}{section.0.2}
+\contentsline {section}{\numberline {3}Data Structure}{2}{section.0.3}
+\contentsline {subsection}{\numberline {3.1}Entity-Relationship Diagram}{2}{subsection.0.3.1}
+\contentsline {subsection}{\numberline {3.2}MySQL Table}{2}{subsection.0.3.2}
+\contentsline {section}{\numberline {4}Division of Labor}{5}{section.0.4}
+\contentsline {section}{\numberline {5}Kernel Codes}{5}{section.0.5}
+\contentsline {subsection}{\numberline {5.1}Google reCaptcha}{5}{subsection.0.5.1}
+\contentsline {subsection}{\numberline {5.2}Two-step friends}{7}{subsection.0.5.2}
+\contentsline {section}{\numberline {6}Website Preview}{7}{section.0.6}
+\contentsline {section}{\numberline {7}References}{7}{section.0.7}

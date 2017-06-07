@@ -38,6 +38,7 @@ This project aims to build a social network with JSP and MySQL.
 			\item Email address regex check
 			\item Ajax
 			\item Add Google's reCaptcha\footnote{Completely Automated Public Turing test to tell Computers and Humans Apart} validation
+			\item Two-step friends
 		\end{itemize}
 \end{itemize}
 
@@ -60,13 +61,13 @@ This project is hosted on Amazon Linux AMI server provided by AWS. To build the 
 	\item install MySQL\footnote{MySQL is case insensitive for Windows and MacOS, but that's not true for Linux.} and prepare MySQL connector/J in WEB-INF/lib
 \end{enumerate}
 
-Note: we've taken GitHub for convenient teamwork. Our project is being maintained at \url{https://github.com/PKU-2017-Database/Social-Network}.
+Note: Our project has been hosted at GitHub. Visit our project at \url{https://github.com/PKU-2017-Database/Social-Network}.
 
 \section{Data Structure}
 
 \subsection{Entity-Relationship Diagram}
 
-We refer to the ER Diagram provided by TA. Here is an English version of that ER Diagram redrawn by \LaTeX.
+Here is an English version of ER Diagram redrawn by \LaTeX.
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -86,7 +87,7 @@ According to the above ER Diagram, we've designed MySQL tables as below.
 \caption{MySQL Table Structure}
 \end{figure}
 
-Details about the attributes:
+Details about tables and attributes:
 
 \input{tbdetail.tex}
 
@@ -104,10 +105,23 @@ Our group members:
 Division of labor:
 
 \begin{itemize}
-	\item He Yan: write documentation for project via \LaTeX
-	\item Sun Meng: CSS design of website
-	\item Wu Chuchuan: HTML (via JSP or PHP) and database
+	\item He Yan: write documentation \& add reCaptcha to website
+	\item Sun Meng: design of website appearance
+	\item Wu Chuchuan: logical framework \& database implementation
 \end{itemize}
+
+\section{Kernel Codes}
+
+\subsection{Google reCaptcha}
+\input{recaptcha.tex}
+
+% TODO: add crucial codes of two-step friend
+\subsection{Two-step friends}
+% \input{twostep.tex}
+
+% TODO: add image preview of website
+\section{Website Preview}
+% \includegraphics[width=100px,height=100px]{a.png}
 
 \section{References}
 
@@ -117,7 +131,5 @@ Division of labor:
 	\item \href{https://dev.mysql.com/downloads/connector/j/}{mysql-connector-java-5.1.42-bin.jar}
 	\item \href{https://mvnrepository.com/artifact/javax.json/javax.json-api/1.1}{javax.json-api-1.1.jar}
 \end{itemize}
-
-%Running picture
 
 \end{document}

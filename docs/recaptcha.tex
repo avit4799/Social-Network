@@ -1,0 +1,52 @@
+\begin{lstlisting}
+/* Client Side */
+<div class="g-recaptcha" data-sitekey="6LdDNiMUAAAAAHDPfsdqqPKAPFEy5Xi3EoGwJIXi"></div>
+
+/* Server Side */
+String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+String url = "https://www.google.com/recaptcha/api/siteverify";
+String secret = "6LdDNiMUAAAAACVxX9eQOV4ITsc9YApSRpb80Lle";
+boolean check = true;
+if (!(gRecaptchaResponse == null || "".equals(gRecaptchaResponse))) {
+	try{
+		URL obj = new URL(url);
+		HttpsURLConnection con =
+			(HttpsURLConnection) obj.openConnection();
+		con.setRequestMethod("POST");
+		con.setDoOutput(true);
+
+		String postParams
+			= "secret=" + secret + "&response=" + gRecaptchaResponse;
+
+		DataOutputStream wr =
+			new DataOutputStream(con.getOutputStream());
+		wr.writeBytes(postParams);
+		wr.flush();
+		wr.close();
+
+		BufferedReader in =
+			new BufferedReader(
+				new InputStreamReader(
+					con.getInputStream()));
+		String inputLine;
+		StringBuffer rsps = new StringBuffer();
+		while ((inputLine = in.readLine()) != null) {
+			rsps.append(inputLine);
+		}
+		in.close();
+
+		JsonReader jsonReader =
+			Json.createReader(
+				new StringReader(rsps.toString()));
+		JsonObject jsonObject = jsonReader.readObject();
+		jsonReader.close();
+		check=jsonObject.getBoolean("success");
+	} catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+...
+if (check) {
+	...
+}
+\end{lstlisting}
