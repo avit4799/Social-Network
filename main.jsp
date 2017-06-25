@@ -57,22 +57,54 @@
 	<title>Social Network</title>
 	<meta http-equiv="content-Type" content="text/html;charset=UTF-8">
 	<style>
-		.input_detail {
-			width:500px;
-			height: 80px;
-			border: 1px solid #ccc;
-			border-left-color: #9a9a9a;
-			border-top-color: #9a9a9a;
-			outline: none;
-			word-wrap: break-word;
-			font-size: 18px;
-			overflow:auto;
-		}
-		.comment{
-			border-style: dashed;
-			border-width: 1px 0px 0px 0px;
-			border-color: "#202020";
-		}
+		body 
+  {
+  background-image:url(background.jpg);
+  background-repeat:no-repeat;
+  background-attachment:fixed
+  }
+		ul
+		{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    position:relative;
+    left:100px;
+    }
+
+    li
+    {
+     float:left;
+    }
+    a{
+    	display:block;
+    	min-width:160px;
+    	font-weight:bold;
+    	color:#FFFFFF;
+    	background-color:#669999;
+    	text-algn:center;
+    	padding:4px;
+    	text-decoration:none;
+    	text-transfrom:uppercase;
+    	}
+    
+   a:hover,a:active
+  {
+    background-color:#cc0000;
+  }
+  div{
+		background-color: #ffffff;
+		width: 1000px;
+    min-height: 100px;
+    margin:30px;
+    
+    position:relative;
+    top:15%;
+    left:5%;   
+    opacity:0.75;
+
+	}
 	</style>
 	<SCRIPT type="text/javascript">
 		function submitStatement(){
@@ -151,42 +183,36 @@
 		}
 	</SCRIPT>
 </head>
-<body  align="center" style="width:700">
+<body>	
     <%response.setIntHeader("Refresh", 30);%>
-	<div align="center">
-	<table>
-	<tr>
-	<td style="width:100">Hi, <a href="main.jsp"><%
+    
+    <ul>
+    	<li> <a href="main.jsp">hi,<%
 	sql= "SELECT * FROM `working`.`user` where email='"+email+"' LIMIT 15";
 	System.out.println(sql);
-
 	//取得结果
 	ResultSet rs = stmt.executeQuery(sql);
 	if (rs.next()){
 		out.println(rs.getString("UserName"));
 	}%></a>
-	</td>
-    <td style="width:100">
-    <a href="myFriends.jsp">Following</a>
-    </td>
-    <td style="width:100">
-    <a href="personalInfo.jsp">Profile</a>
-    </td>
-	<td style="width:500">
-	<form action="search.jsp" method="post">
-		<input type="text" name="searchName" maxlength="20" style="width:120"/>
-		<input type="submit" value="Find friends" />
-		<input type="button" value="Sign out" onclick="location.href='logout.jsp'" />
-	</form>
-	</td>
-	</tr>
-	</table>
-	</div>
-	<hr width="700" align="center"/>
+	    </li>
+    	<li> <a href="myFriends.jsp">Following</a></li>
+    	<li> <a href="personalInfo.jsp">Profile</a></li> 
+    	<form action="search.jsp" method="post">
+    		<li>
+    		 <a><input type="text" name="searchName" maxlength="20" style="width:120"/></a>   
+    	</li>
+    	<li> 	
+    	   <a><input type="submit" value="Find friends"/></a>
+    	</li>
+    	<li><a href="logout.jsp">Sign out</a></li>
+    	</form> 
+    </ul>  		
+	  
 	<div align="center">
-	<font size="4">Current status:</font>
-	<TEXTAREA type="text" id="statement"  rows=4 cols=15 class="input_detail"></TEXTAREA>
-	<input style="height: 20; width:50" type="button" value="发布" onclick="submitStatement()"/>
+		<font size="4">Current status:</font>
+	 <TEXTAREA type="text" id="statement"  rows=3 cols=15 class="input_detail"></TEXTAREA>
+	 <input style="height: 20; width:50" type="button" value="发布" onclick="submitStatement()"/>
 	</div>
 	<%
 	sql= "SELECT a.email as email, username, statusnum, time, content "
@@ -200,31 +226,35 @@
 	System.out.println(sql);
 	//取得结果
 	rs = stmt.executeQuery(sql);
-
 	while (rs.next()){
 	%>
-	<div align="center">
-	<hr width="700"/>
-	<table bgcolor="">
+	
+	<div align="center">		
+			
 	<tr height="10">
-	<td  width="500"><font size="4" color="black"><a href="view.jsp?email=<%out.print(rs.getString("email"));%>"><%out.print(rs.getString("username"));%></a>:</font>
+	<a color=white href="view.jsp?email=<%out.print(rs.getString("email"));%>"><%out.print(rs.getString("username"));%></a>
+ 	</tr>
+ 	<div style="width:800px">
+ 		<p style="word-wrap:break-word; word-break:break-all;text-align:left">
+		<font size="6" color="black"><%out.print(rs.getString("content"));%></font>
+	</p>
+ 	</div>
+ 		 	
+	<td>
+		<font size="3" color="gray"><%out.print(rs.getString("time"));%></font>
 	</td>
-	</tr>
-	<tr height="100">
-	<td width="500"><font size="4" color="black"><%out.print(rs.getString("content"));%></font>
+	
+	<td width="40">
+		<a style="width:200px" href="javascript:reply('<%out.print(rs.getString("statusnum"));%>', '0')">Reply</a>
 	</td>
-	<td width="110"><font size="3" color="gray"><%out.print(rs.getString("time"));%></font>
-	</td>
-	<td width="40"><a href="javascript:reply('<%out.print(rs.getString("statusnum"));%>', '0')">Reply</a><td>
-	</tr>
-    <tr height="10">
+	
 	<td  width="650">
-    <div>
+    
 	<input style="display:none; height:25;width:500" id="<%out.print(rs.getString("statusnum"));%>,0" value=""/>
 	<input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,0Button" value="Submit" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>',0)"/>
-	</div>
-    </td>
-	</tr>
+	
+  </td>
+	
 	<%
 	String sql2="SELECT a.email as email, a.username as username, replynum, time, reply, c.email as email2, c.username as username2 "
 		+				"FROM `working`.`user` as a, `working`.`reply` as b, `working`.`user` as c "
@@ -237,8 +267,7 @@
 	ResultSet rs2 = stmt2.executeQuery(sql2);
 	while (rs2.next()){
 	%>
-	<tr height="">
-
+	
 	<td class="comment" width="500"><font size="3" color="black">
     <a href="view.jsp?email=<%out.print(rs2.getString("email"));%>"><%out.print(rs2.getString("username"));%></a>Replies:<a href="view.jsp?email=<%out.print(rs2.getString("email2"));%>"><%out.print(rs2.getString("username2"));%></a>
     </font><font size="4" color="black"><%out.print(rs2.getString("reply"));%></font>
@@ -249,10 +278,10 @@
 	</tr>
     <tr height="10">
 	<td  width="650">
-    <div>
+    
 	<input style="display:none; height:25;width:500" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>" value=""/>
 	<input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>Button" value="Submit" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')"/>
-	</div>
+	
     </td>
 	</tr>
 
@@ -260,7 +289,7 @@
 	}
 	rs2.close();
 	%>
-	</table>
+	
 	</div>
 	<%
 	}
