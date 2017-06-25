@@ -49,38 +49,89 @@
 <head>
 	<title>Following</title>
 	<meta http-equiv="content-Type" content="text/html;charset=UTF-8">
+	
+	<style>
+			body 
+  {
+  	
+  	width:1200;
+  background-image:url(background.jpg);
+  background-repeat:no-repeat;
+  background-attachment:fixed
+  }
+  ul
+		{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    position:relative;
+    left:100px;
+    }
+
+    li
+    {
+     float:left;
+    }
+    a{
+    	display:block;
+    	min-width:160px;
+    	font-weight:bold;
+    	color:#FFFFFF;
+    	background-color:rgb(150,170,180);
+    	text-algn:center;
+    	padding:4px;
+    	text-decoration:none;
+    	text-transfrom:uppercase;
+    	}
+    
+   a:hover,a:active
+  {
+    background-color:#cc0000;
+  }
+  
+  div{
+		background-color: #ffffff;
+		width: 1000px;
+    min-height: 100px;
+    margin:30px;
+    
+    position:relative;
+    top:15%;
+    left:5%;   
+    opacity:0.75;
+
+	}
+	</style>
+	
 </head>
 
-<body  align="center" style="width:700">
-	<div align="center">
-	<table>
-	<tr>
-	<td style="width:100">Hi, <a href="main.jsp"><%
+<body>
+	
+	 <ul>
+    	<li> <a href="main.jsp">hi,<%
 	sql= "SELECT * FROM `working`.`user` where email='"+email+"' LIMIT 15";
 	System.out.println(sql);
-
 	//取得结果
 	ResultSet rs = stmt.executeQuery(sql);
 	if (rs.next()){
 		out.println(rs.getString("UserName"));
 	}%></a>
-	</td>
-    <td style="width:100">
-    <a href="myFriends.jsp">Following</a>
-    </td>
-    <td style="width:100">
-    <a href="personalInfo.jsp">Profile</a>
-    </td>
-	<td style="width:500">
-	<form action="search.jsp" method="post">
-		<input type="text" name="searchName" maxlength="20" style="width:120"/>
-		<input type="submit" value="Find friends" />
-		<input type="button" value="Sign out" onclick="location.href='logout.jsp'" />
-	</form>
-	</td>
-	</tr>
-	</table>
-	</div>
+	    </li>
+    	<li> <a href="myFriends.jsp">Following</a></li>
+    	<li> <a href="personalInfo.jsp">Profile</a></li> 
+    	<form action="search.jsp" method="post">
+    		<li>
+    		 <a><input type="text" name="searchName" maxlength="20" style="width:120"/></a>   
+    	</li>
+    	<li> 	
+    	   <a><input type="submit" value="Find friends"/></a>
+    	</li>
+    	<li><a href="logout.jsp">Sign out</a></li>
+    	</form> 
+    </ul> 
+    
+	
 	<hr  style="width:700" />
 	<%
 	sql= "SELECT * FROM `working`.`friends` as a, `working`.`user` as b, `working`.`userdetail` as c where a.email2 = c.email and a.email2 = b.email and a.email = '" + email + "'";
@@ -89,10 +140,10 @@
 	rs = stmt.executeQuery(sql);
 	while (rs.next()){
 	%>
-	<div align="center" style="width:700" >
-	<li>
-	<a href="view.jsp?email=<%out.print(rs.getString("email2"));%>"><%out.print(rs.getString("username"));%></a>&nbsp;Gender: <%out.print(rs.getString("sex"));%>&nbsp;Date of birth: <%out.print(rs.getString("year"));%>/<%out.print(rs.getString("month"));%>/<%out.print(rs.getString("day"));%>	
-	</li>
+	<div  style="width:700;height:200" >
+	
+<a style="width:200px" href="view.jsp?email=<%out.print(rs.getString("email2"));%>"><%out.print(rs.getString("username"));%></a></br>&nbsp &nbsp &nbsp Gender: <%out.print(rs.getString("sex"));%></br></br>&nbsp&nbsp&nbsp&nbsp&nbsp;Date of birth: <%out.print(rs.getString("year"));%>/<%out.print(rs.getString("month"));%>/<%out.print(rs.getString("day"));%>	
+	
 	</div>
 	<%
 	}
