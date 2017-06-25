@@ -4,7 +4,7 @@
 <%@page import="java.sql.*"%>
 <%@page import="com.mysql.jdbc.ResultSetMetaData"%>
 
-<body>
+<body style="background:url(loading.gif) no-repeat fixed center">
 <%
 	int ok=0;
 	if(session.getAttribute("login")!=null && session.getAttribute("login").equals("ok")){
