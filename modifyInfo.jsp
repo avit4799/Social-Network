@@ -95,7 +95,7 @@
 
 %>
 
-<body>
+<body style="background:url(frog.gif) no-repeat fixed center">
 <%
 if (ok==1){
 	out.println("<p>You've successfully changed profile.</p>");
