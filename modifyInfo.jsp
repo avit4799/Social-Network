@@ -9,7 +9,7 @@
     	response.setCharacterEncoding("UTF-8");
         String username = null;
         if(request.getParameter("username")!=null)
-            username= java.net.URLDecoder.decode(request.getParameter("username"),"UTF-8");//获取请求参数  
+            username= java.net.URLDecoder.decode(request.getParameter("username"),"UTF-8");//获取请求参数
 		String sex=request.getParameter("sex");
 		String year=request.getParameter("year");
 		String month=request.getParameter("month");
@@ -50,7 +50,7 @@
 		//设置字符集
 		stmt.executeQuery("SET NAMES UTF8");
         String sql = null;
-        
+
         if(username!=null && username != ""){
             sql = "UPDATE `working`.`user` SET username = '"+username +"' WHERE email = '" + email +"'";
 			System.out.println(sql);
@@ -86,27 +86,27 @@
 			System.out.println(sql);
 			stmt.execute(sql);
         }
-			
+
         ok=1;
-		
+
 		/** 关闭连接 **/
 		conn.close();
 		stmt.close();
-	
+
 %>
 
-<body>
+<body style="background:url(frog.gif) no-repeat fixed center">
 <%
 if (ok==1){
-	out.println("<p>修改成功！！</p>");
-	out.println("<p>5秒后返回<a href=\"main.jsp\">主页</a></p>");
+	out.println("<p>You've successfully changed profile.</p>");
+	out.println("<p>Back to <a href=\"main.jsp\">Homepage</a> after 5 secs...</p>");
 	String content=5+";URL="+"main.jsp";
-	response.setHeader("REFRESH",content); 
+	response.setHeader("REFRESH",content);
 }else{
-	out.println("<p>出现未知错误！！</p>");
-	out.println("<p>5秒后返回<a href=\"main.jsp\">主页</a>！！</p>");
+	out.println("<p>Unknown error.</p>");
+	out.println("<p>Back to <a href=\"main.jsp\">Homepage</a> after 5 secs...</p>");
 	String content=5+";URL="+"main.jsp";
-	response.setHeader("REFRESH",content); 
+	response.setHeader("REFRESH",content);
 }
 %>
 </body>

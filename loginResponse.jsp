@@ -123,12 +123,12 @@ if(check){ // added part
 	String content=0+";URL="+"main.jsp";
 	response.setHeader("REFRESH",content); }
 	else{
-	out.println("验证未通过！");
+	out.println("Validation failed!");
 	String content=2+";URL="+"login.jsp";
 	response.setHeader("REFRESH",content);
 	}
 }else{
-	out.println("用户名或密码错误！");
+	out.println("Username or password wrong!");
 	String content=2+";URL="+"login.jsp";
 	response.setHeader("REFRESH",content);
 }

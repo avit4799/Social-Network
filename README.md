@@ -34,7 +34,7 @@ There exist 5 tables now.
 
 - UserDetail - store user details
 	- EMAIL CHAR(30) PRIMARY KEY FOREIGN KEY REFERENCES User(EMAIL): primary & foreign key pointing to User.Email
-	- SEX CHAR(3): user's sex
+	- SEX CHAR(8): user's sex
 	- YEAR INT: user's year of birth
 	- MONTH INT: user's month of birth
 	- DAY INT: user's day of birth
