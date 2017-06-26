@@ -59,6 +59,7 @@
 	<style>
 		body{
 			word-wrap:break-word; word-break:break-all;
+			text-decoration:none;
 		}
 		
 			section {
@@ -335,7 +336,7 @@ a {
   
 </section>
 
-<div style="position:absolute;left:1000px;top:100px">
+  <div style="position:absolute;left:1000px;top:100px">
 		<form action="search.jsp" method="post">
     	<input type="text" name="searchName" maxlength="20" style="width:120"/> 
       <input type="submit" value="Find friends"/>    	
@@ -381,18 +382,21 @@ a {
 	<hr width="1000"/>
 	<table bgcolor="">
 		<tr height="">
-	<td  width="500"><a style="display:block;width:160px ;color:#FFFFFF;background:url(background3.jpeg) no-repeat fixed ;text-align:center;text-decoration:none;padding:4px;;font-weight:bold;" href="view.jsp?email=<%out.print(targetEmail);%>"><%out.print(targetName);%></a></font>
-	</td>
-	</tr>
+	    <td  width="500">
+	    	<a style="display:block;width:160px ;color:#FFFFFF;background:url(background3.jpeg) no-repeat fixed ;
+	    		text-align:center;text-decoration:none;padding:4px;font-weight:bold;"
+	    		 href="view.jsp?email=<%out.print(targetEmail);%>"><%out.print(targetName);%></a>
+	    </td>
+	  </tr>
 	<tr height="100">
 	<td width="500"><font size="5" color="black"><%out.print(rs.getString("content"));%></font>
 	</td>
 	<td width="110"><font size="3" color="gray"><%out.print(rs.getString("time"));%></font>
 	</td>
-	<td width="60"><a style="text-decoration:none;font-weight:bold;" href="javascript:reply('<%out.print(rs.getString("statusnum"));%>', '0')">Reply</a><td>
+	<td width="60"><a style="text-decoration:none;font-weight:bold;" href="javascript:reply('<%out.print(rs.getString("statusnum"));%>', '0')">Reply</a></td>
 	</tr>
-    <tr height="10">
-	<td  width="650">
+  <tr height="10">
+	  <td  width="650">
     <div>
 	<input style="display:none; height:25;width:500" id="<%out.print(rs.getString("statusnum"));%>,0" value=""/>
 	<input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,0Button" value="Submit" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>',0)"/>
@@ -411,6 +415,7 @@ a {
 	ResultSet rs2 = stmt2.executeQuery(sql2);
 	while (rs2.next()){
 	%>
+	
 	<tr height="">
 
 	<td class="comment" width="500"><font size="3" color="black">
@@ -419,16 +424,16 @@ a {
 	</td>
 	<td  class="comment" width="110"><font size="3" color="gray"><%out.print(rs2.getString("time"));%></font>
 	</td>
-	<td  class="comment" width="60"><a href="javascript:reply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')">Reply</a><td>
+	<td  class="comment" width="60"><a href="javascript:reply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')">Reply</a></td>
 	</tr>
     <tr height="10">
-	<td  width="650">
+	  <td  width="650">
     <div>
-	<input style="display:none; height:25;width:500" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>" value=""/>
-	<input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>Button" value="Submit" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')"/>
-	</div>
+	    <input style="display:none; height:25;width:500" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>" value=""/>
+	    <input type="button" style="display:none;" id="<%out.print(rs.getString("statusnum"));%>,<%out.print(rs2.getString("replynum"));%>Button" value="Submit" onclick="submitReply('<%out.print(rs.getString("statusnum"));%>','<%out.print(rs2.getString("replynum"));%>')"/>
+   	</div>
     </td>
-	</tr>
+	  </tr>
 
 	<%
 	}
