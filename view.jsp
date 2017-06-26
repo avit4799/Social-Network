@@ -57,6 +57,202 @@
 	<title>Social Network</title>
 	<meta http-equiv="content-Type" content="text/html;charset=UTF-8">
 	<style>
+		body{
+			word-wrap:break-word; word-break:break-all;
+		}
+		
+			section {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.blur-container {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.blur-container::before, .blur-container::after {
+  top: 0px;
+  left: 0px;
+  content: '';
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+}
+.blur-container .container-fluid {
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+}
+.blur-container .blur-box {
+  display: block;
+  position: relative;
+}
+.blur-container .blur-box::before, .blur-container .blur-box::after {
+  top: 0px;
+  left: 0px;
+ // content: '';
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+}
+
+.blur-container.blur-8 {
+  --bg: url(background3.jpeg);
+  overflow: hidden;
+  background-image: var(--bg);
+}
+.blur-container.blur-8::after {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.8;
+  -webkit-filter: blur(6px);
+          filter: blur(6px);
+  background-image: var(--bg);
+}
+
+.blur-container.blur-8 .blur-box {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #fff;
+  width: 100%;
+  height: 90%;
+  z-index: 11;
+  max-width: 600px;
+  max-height: 400px;
+  border-radius: 10px;
+  background-image: var(--bg);
+  box-shadow: 0px 0px 30px #333;
+}
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+
+.blur-container.blur-5 {
+  --bg: url(background3.jpeg);
+  background-image: var(--bg); 
+  
+}
+.blur-container.blur-5::after {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.1;
+  -webkit-filter: blur(6px);
+          filter: blur(6px);
+  background-image: var(--bg);
+}
+.blur-container.blur-5 .blur-box {
+  
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  
+  
+}
+.blur-container.blur-5 .blur-box .btn {
+  color: #fff;
+  -webkit-transition: 0s;
+  transition: 0s;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 40px;
+  border: 2px solid #fff;
+  text-decoration: none;
+}
+.blur-container.blur-5 .blur-box .btn span {
+  position: relative;
+  z-index: 10;
+}
+.blur-container.blur-5 .blur-box .btn::before, .blur-container.blur-5 .blur-box .btn::after {
+  content: '';
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  position: absolute;
+}
+.blur-container.blur-5 .blur-box .btn:hover::before {
+  opacity: 0.2;
+  background-color: #999;
+}
+.blur-container.blur-5 .blur-box .btn:hover::after {
+  -webkit-filter: blur(4px) brightness(120%);
+          filter: blur(4px) brightness(120%);
+}
+.blur-container.blur-5 .blur-box .btn::before {
+  z-index: 10;
+  opacity: 0.4;
+  background-color: #333;
+}
+.blur-container.blur-5 .blur-box .btn::after {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: var(--bg);
+  -webkit-filter: blur(4px) brightness(70%);
+          filter: blur(4px) brightness(70%);
+}
+.blur-container.blur-5 .blur-box::before {
+  z-index: 10;
+  opacity: 0.4;
+  background-color: #333;
+}
+.blur-container.blur-5 .blur-box::after {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: var(--bg);
+  -webkit-filter: blur(4px) brightness(70%);
+          filter: blur(4px) brightness(70%);
+}
+.align-items-center {
+    -webkit-box-align: center !important;
+    -webkit-align-items: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+}
+.justify-content-center {
+    -webkit-box-pack: center !important;
+    -webkit-justify-content: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+}
+		
+	
 		.comment{
 			border-style: dashed;
 			border-width: 1px 0px 0px 0px;
@@ -111,39 +307,46 @@
 		}
 	</SCRIPT>
 </head>
-<body  align="center" style="width:700">
-	<div align="center">
-	<table>
-	<tr>
-	<td style="width:100">Hi, <a href="main.jsp"><%
+
+<body >
+		<section class="blur-container blur-5 justify-content-center align-items-center" style="height:130px">
+  <div class="blur-box">
+    <div class="container-fluid d-flex justify-content-around align-items-center">
+    	
+    	   		
+      <a style="position:absolute; left:80px" href="main.jsp" rel="nofollow" rel="noreferrer"class="btn"><span>Hi,<%
 	sql= "SELECT * FROM `working`.`user` where email='"+email+"' LIMIT 15";
 	System.out.println(sql);
-
 	//取得结果
 	ResultSet rs = stmt.executeQuery(sql);
 	if (rs.next()){
 		out.println(rs.getString("UserName"));
-	}%></a>
-	</td>
-    <td style="width:100">
-    <a href="myFriends.jsp">Following</a>
-    </td>
-    <td style="width:100">
-    <a href="personalInfo.jsp">Profile</a>
-    </td>
-	<td style="width:500">
-	<form action="search.jsp" method="post">
-		<input type="text" name="searchName" maxlength="20" style="width:120"/>
-		<input type="submit" value="Find friends" />
-		<input type="button" value="Sign out" onclick="location.href='logout.jsp'" />
-	</form>
-	</td>
-	</tr>
-	</table>
+	}%></</span></a>
+      <a style="position:absolute; left:600px" href="myFriends.jsp" rel="nofollow" rel="noreferrer"class="btn"><span>
+      	Following
+      </span></a>
+      <a style="position:absolute; left:800px" href="personalInfo.jsp" rel="nofollow" rel="noreferrer"class="btn"><span>Profile</span></a>
+      <a style="position:absolute; left:1000px" value="Sign out" onclick="location.href='logout.jsp'" rel="nofollow" rel="noreferrer"class="btn"><span>Sign out</span></a>     
+       
+   			      
+    </div>
+    
+  </div>
+  
+</section>
+
+<div style="position:absolute;left:1000px;top:100px">
+		<form action="search.jsp" method="post">
+    	<input type="text" name="searchName" maxlength="20" style="width:120"/> 
+      <input type="submit" value="Find friends"/>    	
+    </form> 
 	</div>
-	<hr width="700" align="center"/>
-	<div align="center">
-	<p width="700">
+	<div style="height:5">	
+	</div>
+	
+<section class="blur-container blur-8 justify-content-center align-items-center" style="height:80px">
+	<div style="position:absolute;top:6px;left:750px;height:63px;min-width:350px;" class="blur-box">
+   
 	<%
 	sql= "SELECT * FROM `working`.`user` as a, `working`.`userdetail` as b where a.email='"+targetEmail+"' and a.email=b.email";
 	System.out.println(sql);
@@ -153,14 +356,15 @@
 	rs = stmt.executeQuery(sql);
 	if (rs.next()){
 		targetName=rs.getString("username");
-		out.print(targetName+" ");
-		out.print("Gender: "+rs.getString("sex")+" ");
-		out.print("Date of birth: "+rs.getString("year")+"/");
+		out.print(targetName+"</br>");
+		out.print("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Gender: "+rs.getString("sex")+"</br>");
+		out.print("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Date of birth: "+rs.getString("year")+"/");
 		out.print(rs.getString("month")+"/");
         	out.print(rs.getString("day"));
-	}%>
-	</p>
-	</div>
+	}%>		
+  </div> 
+</section>
+
 	<%
 	sql= "SELECT statusnum,time,content "
 		+				"FROM `working`.`status` "
@@ -172,20 +376,20 @@
 	rs = stmt.executeQuery(sql);
 	while (rs.next()){
 	%>
+	
 	<div align="center">
-	<hr width="700"/>
+	<hr width="1000"/>
 	<table bgcolor="">
 		<tr height="">
-
-	<td  width="500"><font size="4" color="black"><a href="view.jsp?email=<%out.print(targetEmail);%>"><%out.print(targetName);%></a>:</font>
+	<td  width="500"><a style="display:block;width:160px ;color:#FFFFFF;background:url(background3.jpeg) no-repeat fixed ;text-align:center;text-decoration:none;padding:4px;;font-weight:bold;" href="view.jsp?email=<%out.print(targetEmail);%>"><%out.print(targetName);%></a></font>
 	</td>
 	</tr>
 	<tr height="100">
-	<td width="500"><font size="4" color="black"><%out.print(rs.getString("content"));%></font>
+	<td width="500"><font size="5" color="black"><%out.print(rs.getString("content"));%></font>
 	</td>
 	<td width="110"><font size="3" color="gray"><%out.print(rs.getString("time"));%></font>
 	</td>
-	<td width="60"><a href="javascript:reply('<%out.print(rs.getString("statusnum"));%>', '0')">Reply</a><td>
+	<td width="60"><a style="text-decoration:none;font-weight:bold;" href="javascript:reply('<%out.print(rs.getString("statusnum"));%>', '0')">Reply</a><td>
 	</tr>
     <tr height="10">
 	<td  width="650">
@@ -231,6 +435,9 @@
 	rs2.close();
 	%>
 	</table>
+	<hr width="1000"/>
+	<section class="blur-container blur-8 justify-content-center align-items-center" style="height:80px">
+	</section>
 	</div>
 	<%
 	}
